@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027 동아마라톤 훈련 스케줄</title>
+<!--
+Copyright (c) 2021, Kil Hyung-jin (https://github.com/orioncactus/pretendard),
+with Reserved Font Name Pretendard.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+-->
+<style>
+@font-face{font-family:'Pretendard';src:url(pretendard.woff2) format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+:root{color-scheme:light;--ink:#252b3b;--muted:#5c6677;--line:#e3e5eb;--surface:#fff;--paper:#f4f5f7;--green:#4655ad;--amber:#754b0e;font:16px/1.55 "Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+button,select,summary{cursor:pointer}
+button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #1475a6;outline-offset:3px}
+button{border:1px solid var(--line);background:white;border-radius:11px;padding:.52rem .75rem;font-weight:700}
+button:hover{border-color:var(--green);background:#f3f3ff}
+button.primary,button[aria-pressed="true"]{background:var(--green);color:white;border-color:var(--green)}
+a{color:var(--green)}
+h1,h2,h3,h4,p{margin:0}
+h2{font-size:1.3rem;line-height:1.3}
+h3{font-size:1.03rem}
+.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+.hero{background:var(--paper);padding:36px 0 30px}
+.hero-inner{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:22px;min-height:260px}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.15em}
+.hero .eyebrow{color:var(--green)}
+h1{font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.065em;line-height:1.18;margin:.5rem 0}
+.hero .sub{color:#a51d20;font-size:.88rem;font-weight:700}
+.goals{display:flex;gap:8px;flex-wrap:wrap}
+.goal{min-width:98px;display:grid;gap:5px;padding:12px 15px;border:1px solid var(--line);border-radius:16px;background:#fff;font-size:.73rem;color:var(--muted);white-space:nowrap}
+.goal b{font:800 1.3rem/1.2 system-ui,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.goal:first-child{background:#e8eaf9;border-color:#e8eaf9}
+.goal:first-child b{color:#394a9e}
+main{padding-bottom:40px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 28px rgba(35,43,65,.035)}
+.overview{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.today{background:#eeeffb;border-color:#e0e2f5}
+.week{background:#fff}
+.overline,.muted,.lede{color:var(--muted);font-size:.84rem}
+.overline{font-weight:800;margin-bottom:5px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:.65rem;flex-wrap:wrap}
+.detail-copy{margin:.55rem 0;color:var(--muted);font-size:.9rem;overflow-wrap:anywhere}
+.metrics{display:flex;flex-wrap:wrap;gap:.45rem 1.2rem;margin:.62rem 0;font-size:.82rem;color:var(--muted)}
+.metrics b{color:var(--ink);font-size:1rem;font-variant-numeric:tabular-nums}
+.statusline{min-height:1.5rem;margin:5px 0;color:var(--green);font-size:.82rem}
+.calendar-card{padding:0;overflow:hidden}
+.calendar-header{padding:22px 24px 18px;display:grid;gap:14px}
+.controls{display:flex;gap:5px;flex-wrap:wrap}
+.controls button{font-size:.83rem;padding:.45rem .78rem;border-radius:99px}
+.legend{display:flex;gap:.42rem .7rem;flex-wrap:wrap;color:var(--muted);font-size:.72rem}
+.badge{display:inline-block;border-radius:5px;padding:.09rem .34rem;font-size:.69rem;font-weight:800;background:#eaf0ec;color:#36564b;white-space:nowrap}
+.b-NSM{color:#6d366e;background:#f2e2f3}.b-E{color:#0b6048;background:#def2e6}
+.b-L{color:#1b4a7b;background:#e1edf9}.b-MP{color:#82421e;background:#fae7d9}
+.b-check,.b-race{color:#fff;background:#c62828}
+.b-TR{color:#575917;background:#f1f0d6}.b-S{color:#4f4277;background:#ece7f5}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.weekday{background:#f7f8fb;text-align:center;font-weight:800;padding:10px 7px;font-size:.8rem;color:var(--muted)}
+.day,.blank{min-width:0;min-height:109px;border:0;border-radius:0}
+.blank{background:#f8f9fa;padding:10px;color:#89919d;font-size:.8rem}
+.day{display:grid;align-content:start;gap:5px;padding:10px;text-align:left;background:#fff;position:relative}
+.day.today-cell{box-shadow:inset 0 0 0 2px var(--green);background:#f6f6ff}
+.day.done{background:#e8f6ec}
+.day.skipped{background:#f4f2ee}
+.day.race-day{border-bottom:3px solid #c62828}
+.day.race-day .date-num{color:#b51e1e}
+.day .row{gap:3px;flex-wrap:nowrap}
+.day .date-num{font-size:.89rem}
+.day .day-title{font-size:.77rem;line-height:1.35;overflow-wrap:anywhere}
+.day .distance,.day .flag{font-size:.69rem;color:var(--muted);line-height:1.3}
+.day .flag{color:var(--green);font-weight:800}
+.day .distance .small{display:none}
+.lower{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.stack{display:grid;gap:14px}
+.tbox{overflow-x:auto;margin:.55rem 0}
+table{width:100%;border-collapse:collapse;text-align:left;font-size:.81rem}
+th,td{padding:.53rem .45rem;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:#f6f7fa;color:var(--muted)}
+td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+#weekly thead th:not(:first-child),[aria-labelledby="monthlyHeading"] thead th:not(:first-child){text-align:right;white-space:nowrap}
+tr.current td,tr.current th{background:#f0f1fb}
+.week-select{display:block;min-height:36px;width:100%;max-width:470px;margin:.42rem 0;padding:.3rem .38rem;border:1px solid #aebfb6;border-radius:7px;background:white;font-size:.86rem}
+.choice-list{display:grid;gap:8px}
+.choice-list h3{font-size:.9rem}
+.choice-list label{display:block;font-size:.84rem;font-weight:700}
+.choice-list select{margin-top:.23rem}
+.plan-changed{border-left:3px solid #71a88b;padding:.35rem .65rem;margin:.55rem 0;background:#f3f8f4}
+.milestone{display:flex;gap:8px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:.61rem 0}
+.milestone:first-child{margin-top:.6rem}
+.milestone button{flex:0 0 min(160px,70%);min-height:36px;text-align:left;font-size:.78rem;padding:.35rem .48rem}
+.milestone span{text-align:right;font-size:.78rem;color:var(--muted)}
+.milestone-group{margin-top:1rem}
+.milestone-group h3{display:flex;align-items:center;gap:.45rem}
+.milestone-group.check .milestone button,.milestone-group.race .milestone button{color:#b51e1e;border-color:#c62828}
+.guide{margin-top:14px}
+.guide summary{font-size:1.12rem;font-weight:800}
+.guide section{padding:14px 0;border-top:1px solid var(--line);margin-top:12px}
+.guide .tag{font-size:.78rem;color:var(--muted)}
+.guide .rule,.guide .alert{background:#f5f6fa;padding:.6rem .75rem;border-radius:10px;margin-top:.48rem;font-size:.86rem}
+.guide .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,195px),1fr));gap:12px}
+.guide .cards>*{border:1px solid var(--line);padding:12px;border-radius:8px;margin-top:.5rem}
+.guide li,.guide p{font-size:.86rem}
+.guide ul,.guide ol{padding-left:1.15rem}
+dialog{width:min(565px,calc(100% - 24px));max-height:90dvh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:22px;color:var(--ink);box-shadow:0 22px 70px rgba(23,28,49,.2)}
+dialog::backdrop{background:#22283f99}
+dialog h2{margin:.35rem 0}
+dialog hr{border:0;border-top:1px solid var(--line);margin:.8rem 0}
+fieldset{padding:0;border:0;margin:.7rem 0;display:grid;gap:8px;min-width:0}
+legend{font-weight:800;font-size:.88rem}
+.field{display:grid;gap:3px;font-size:.82rem;font-weight:700}
+.field input,.field select,.field textarea,dialog textarea{width:100%;border:1px solid #aebfb6;border-radius:7px;background:white;padding:.43rem .5rem}
+.field textarea,dialog textarea{resize:vertical}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.error{color:#9d2929;font-size:.82rem;margin:.45rem 0}
+footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
+[hidden]{display:none!important}
+@media(max-width:1024px){
+  .hero-inner{align-items:flex-start;flex-direction:column;gap:13px}
+  .overview,.lower{grid-template-columns:1fr}
+  .wrap{width:calc(100% - 24px)}
+  .hero{position:relative;padding:32px 0 36px;background-position:68% center}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(249,250,252,.7),rgba(249,250,252,.42) 57%,transparent);pointer-events:none}
+  .hero-inner{position:relative}
+}
+@media(max-width:550px){
+  .card{padding:14px}
+  .calendar-card{padding:0}
+  .calendar-header{padding:12px}
+  .goals{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .goal{min-width:0;padding:10px}
+  .goal b{font-size:1.1rem}
+  .day,.blank{min-height:69px}
+  .day{padding:4px;justify-items:start;gap:2px}
+  .day .row{flex-direction:column;align-items:flex-start}
+  .day .day-title,.day .distance .full,.day .flag{display:none}
+  .day .distance .small{display:inline}
+  .day .badge{font-size:.58rem;padding:.05rem .22rem}
+  .day .distance{font-size:.58rem}
+  .day.done .date-num::after{content:" ✓";color:var(--green)}
+  .day.skipped .date-num::after{content:" –";color:var(--amber)}
+  .weekday{padding:5px 0}
+}
+/* 러닝 앱 스타일 */
+:root{--ink:#18191c;--muted:#5d5e63;--line:#e5e5e5;--surface:#fff;--paper:#f7f7f6;--green:#b42326}
+button{border-radius:10px}
+button:hover{background:#fff2f2;border-color:#b42326}
+button.primary,button[aria-pressed="true"]{background:#b42326;border-color:#b42326;color:#fff}
+.wrap{width:min(1280px,calc(100% - 48px))}
+.hero .eyebrow{color:#a51d20}
+.goal:first-child{background:#b42326;border-color:#b42326;color:#fff}
+.goal:first-child b{color:#fff}
+.goal{border-radius:12px}
+.card{border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.035)}
+.overview{grid-template-columns:1.4fr 1fr}
+.today{background:#fff;border-color:#e5e5e5;border-left:5px solid #b42326;padding:28px}
+.today h2{font-size:1.7rem;letter-spacing:-.04em}
+.today .metrics b{font-size:1.2rem}
+.today .detail-copy{font-size:1rem}
+.week{padding:28px}
+.calendar-header{padding:26px 28px 20px}
+#calendarHeading{font-size:1.55rem;letter-spacing:-.04em}
+.calendar{background:#e5e5e5}
+.weekday{background:#f6f6f5;color:#343539;font-size:.88rem;padding:12px 7px}
+.day,.blank{min-height:126px}
+.day{padding:12px;gap:6px}
+.day .date-num{font-size:1rem}
+.day .day-title{font-size:.87rem}
+.day .distance,.day .flag{font-size:.76rem}
+.day.today-cell{box-shadow:inset 0 0 0 2px #b42326;background:#fff6f5}
+.day.done.today-cell{background:#e8f6ec}
+.b-E{color:#0b6048;background:#def2e6}
+.b-NSM{color:#6d366e;background:#f2e2f3}
+.b-L{color:#1b4a7b;background:#e1edf9}
+.b-MP{color:#82421e;background:#fae7d9}
+.b-TR{color:#575917;background:#f1f0d6}
+.b-S{color:#4f4277;background:#ece7f5}
+.b-X{color:#51545b;background:#ededed}
+.b-check,.b-race{background:#b42326;color:#fff}
+thead th{background:#f6f6f5}
+tr.current td,tr.current th{background:#fff4f3}
+@media(max-width:1024px){
+  .wrap{width:calc(100% - 24px)}
+  .overview{grid-template-columns:1fr}
+}
+@media(max-width:550px){
+  .today,.week{padding:20px}
+  .today h2{font-size:1.4rem}
+  .calendar-header{padding:18px 14px 14px}
+  #calendarHeading{font-size:1.3rem}
+  .day,.blank{min-height:80px}
+  .day{padding:5px 4px;gap:3px}
+  .day .date-num{font-size:.87rem}
+  .day .distance{font-size:.65rem}
+  .day .badge{font-size:.62rem}
+}
+
+/* 완주 장면을 전체 비율로 보여주는 상단 배치 */
+.hero-inner{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-rows:auto auto;gap:18px 30px;min-height:0;align-items:center}
+.hero-inner>div:first-child{grid-column:1;grid-row:1;align-self:end}
+.hero-inner>.goals{grid-column:1;grid-row:2;align-self:start}
+.hero-art{grid-column:2;grid-row:1 / span 2;min-width:0;overflow:hidden;border-radius:16px;box-shadow:0 12px 30px rgba(24,25,28,.12)}
+.hero-art img{display:block;width:100%;height:auto}
+@media(max-width:1024px){
+  .hero::before{display:none}
+  .hero-inner{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:14px}
+  .hero-inner>div:first-child,.hero-inner>.goals,.hero-art{grid-column:1;grid-row:auto}
+}
+
+/* 본문과 주요 기록에 Pretendard 적용 */
+:root{font-family:'Pretendard','Malgun Gothic',sans-serif}
+h1{font-weight:800}
+.goal b{font-family:'Pretendard','Malgun Gothic',sans-serif}
+.goal:first-child b{font-weight:900;font-size:1.6rem}
+@media(max-width:550px){.goal:first-child b{font-size:1.35rem}}
+
+/* 상단 전체에 완주 이미지를 배치하고 제목 뒤를 부드럽게 처리 */
+.hero{position:relative;overflow:hidden;background:#f7f7f6;padding:48px 0 54px}
+.hero-art{position:absolute;inset:0;overflow:hidden;border-radius:0;box-shadow:none}
+.hero-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,250,249,.97) 0%,rgba(250,250,249,.92) 30%,rgba(250,250,249,.46) 54%,rgba(250,250,249,0) 75%);backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);pointer-events:none}
+.hero-inner{position:relative;top:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:260px}
+.hero-inner>div:first-child,.hero-inner>.goals{align-self:start}
+@media(max-width:1024px){
+  .hero{padding:32px 0 36px}
+  .hero-art img{object-position:left top}
+  .hero-art::after{background:linear-gradient(90deg,rgba(250,250,249,.97),rgba(250,250,249,.7) 38%,rgba(250,250,249,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-art"><img src="동아마라톤_330_완주_러너.png" alt="3시간 29분 42초를 기록하며 결승선을 통과하는 러너의 애니메이션풍 그림"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow">2027 SEOUL MARATHON · 20 WEEK PLAN</p>
+      <h1>동아마라톤 훈련 스케줄</h1>
+      <p class="sub">2026.11.02–2027.03.21 · 회복 4주 + 본 훈련 16주 + NSM 훈련</p>
+    </div>
+    <div class="goals" aria-label="대회 목표">
+      <div class="goal">대회까지 <b id="dday">—</b></div>
+      <div class="goal">기본 목표 <b>3:40</b></div>
+      <div class="goal">조건부 도전 <b>3:30</b></div>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <div class="overview">
+    <section class="card today" aria-labelledby="todayHeading">
+      <p class="overline" id="todayDate">오늘</p>
+      <h2 id="todayHeading">오늘의 훈련</h2>
+      <div id="today"></div>
+    </section>
+    <section class="card week" aria-labelledby="weekHeading">
+      <p class="overline" id="weekDate">주간 요약</p>
+      <h2 id="weekHeading">이번 주</h2>
+      <div id="weekSummary"></div>
+    </section>
+  </div>
+  <p id="notice" class="statusline" role="status"></p>
+  <section class="card calendar-card" aria-labelledby="calendarHeading">
+    <div class="calendar-header">
+      <div class="row">
+        <h2 id="calendarHeading">월간 훈련 달력</h2>
+        <div class="controls" id="months" aria-label="표시할 월"></div>
+      </div>
+      <p class="muted" id="monthSummary"></p>
+      <div class="legend" aria-label="훈련 종류">
+        <span><span class="badge b-E">E</span> 이지</span><span><span class="badge b-NSM">NSM</span> 서브역치</span>
+        <span><span class="badge b-L">L</span> 롱런</span><span><span class="badge b-MP">MP</span> 마라톤 페이스</span>
+        <span><span class="badge b-TR">TR</span> 트레일</span><span><span class="badge b-S">S</span> 보강</span>
+        <span><span class="badge b-X">X</span> 휴식</span><span><span class="badge b-check">점검</span> 기록 점검</span>
+        <span><span class="badge b-race">대회</span> 대회</span>
+      </div>
+    </div>
+    <div id="calendar" class="calendar" aria-label="날짜를 누르면 훈련 상세와 기록을 열 수 있습니다"></div>
+  </section>
+  <div class="lower">
+    <div class="stack">
+      <section class="card" id="weekly" aria-labelledby="weeklyHeading">
+        <div class="row"><h2 id="weeklyHeading">20주 거리와 진행률</h2><span id="progress" class="muted"></span></div>
+        <p class="detail-copy">실행률은 완료한 기본 러닝 횟수를 계획된 기본 러닝 횟수로 나눈 값입니다. 오늘까지의 실행률에는 오늘을 포함하며, 미기록과 건너뜀은 완료에 포함하지 않습니다. 선택 훈련·휴식·보강은 제외합니다. 거리 단위는 km이며 하프와 풀코스를 포함합니다. 실적은 직접 입력한 거리만 합산합니다.</p>
+        <details id="weekOptions">
+          <summary>주차별 훈련 옵션</summary>
+          <label class="field" for="weekPicker">주차</label>
+          <select id="weekPicker" class="week-select"></select>
+          <div id="weekChoices"></div>
+        </details>
+        <div class="tbox"><table>
+          <thead><tr><th scope="col">주차 · 단계</th><th scope="col">원본</th><th scope="col">선택 반영</th><th scope="col">실제</th><th scope="col">실행률</th></tr></thead>
+          <tbody id="weeklyTable"></tbody>
+        </table></div>
+      </section>
+    </div>
+    <div class="stack">
+      <section class="card" aria-labelledby="monthlyHeading">
+        <h2 id="monthlyHeading">월별 거리 <span class="muted">(km)</span></h2>
+        <div class="tbox"><table>
+          <thead><tr><th scope="col">훈련일 기준</th><th scope="col">원본</th><th scope="col">선택 반영</th><th scope="col">실제</th></tr></thead>
+          <tbody id="monthlyTable"></tbody>
+        </table></div>
+        <p class="muted">11/30 등 월 경계의 훈련은 실제 날짜의 월에 합산합니다.</p>
+      </section>
+      <section class="card" aria-labelledby="milestoneHeading">
+        <h2 id="milestoneHeading">기록 점검과 대회</h2>
+        <p class="detail-copy">완료 기록을 눌러 시간과 회복 메모를 확인합니다. 목표별 판단 기준은 원본 훈련 가이드에 있습니다.</p>
+        <div id="milestones"></div>
+      </section>
+      <section class="card" aria-labelledby="backupHeading">
+        <h2 id="backupHeading">기록 보관</h2>
+        <p class="detail-copy">선택한 일정과 훈련 기록은 이 브라우저의 현재 파일 위치에 저장됩니다. 다른 브라우저나 파일 위치에서 쓰려면 백업을 옮겨 복원하세요.</p>
+        <button type="button" id="backupOpen">백업 · 복원</button>
+      </section>
+    </div>
+  </div>
+  <details class="card guide">
+    <summary>원본 훈련 가이드</summary>
+    <div class="alert">
+    <h3>회복을 확인하고 첫 조깅 시작</h3>
+    <p>11월 첫 주에는 걷기와 계단이 편해진 뒤 주말 조깅을 시도합니다. 서울마라톤 풀코스는 3월 21일 광화문광장 집결 예정입니다. 참가 확정과 배정 그룹은 동마클럽에서 확인하세요. <a href="https://seoul-marathon.com/95">주최 측 참가자 유의사항</a></p>
+  </div>
+<section>
+  <div class="shead"><h2>이 계획이 바꾼 것</h2><span class="tag">원본 20주 기준</span></div>
+<div class="tbox"><table><thead><tr><th scope="col">항목</th><th scope="col">원본</th><th scope="col">NSM 개정판</th></tr></thead><tbody>
+<tr><td>일정</td><td>회복 R1–R4 + 본훈련 W1–W16</td><td>날짜와 월별 묶음 유지 · 12월 첫 NSM 주는 4회 · 둘째 주부터 20~30분 수요일 이지런을 조건부 도입</td></tr>
+<tr><td>품질 세션</td><td>템포·인터벌·업힐·MP 혼합</td><td>12월 주 1회 NSM · 1월 주 1회 기본, 지정 주에만 2회 · 2월 롱런과 MP 우선</td></tr>
+<tr><td>주말</td><td>백투백 및 28~30km 롱런</td><td>토요일 이지, 일요일 롱런 · 피크 롱런 27km(2시간 45분) 상한 · 주중 이지 분산 · 하프 다음 날 휴식</td></tr>
+<tr><td>실전 점검</td><td>1/23 10km · 2/7 하프</td><td>점검 날짜 유지 · 2/21 후반 MP 5km의 수행과 회복을 확인한 뒤 2/28 후반 MP 9km 여부 결정</td></tr>
+<tr><td>주간 거리</td><td>피크 72km 표기</td><td>조건부 주 5회(4+1일) · 피크 59km 상한 · 주요 선택별 주간 거리와 대회 전 거리 병기</td></tr>
+</tbody></table></div>
+</section>
+<section>
+  <div class="shead"><h2>주간 템플릿</h2><span class="tag">화·수·목·토·일 (조건부 주 5회)</span></div>
+<div class="tbox"><table><thead><tr><th scope="col">요일</th><th scope="col">기본 운용</th></tr></thead><tbody>
+<tr><td>월·금</td><td>러닝 0km · 월요일 가벼운 보강 또는 휴식, 금요일 완전 휴식</td></tr>
+<tr><td>화</td><td>NSM 지정일 또는 이지런 · 2월과 테이퍼에는 주간 목적에 맞춰 조정</td></tr>
+<tr class="hi"><td>수 (안전밸브)</td><td>일정에 표시된 주만 선택. 12월 둘째 주는 20~30분·최대 4km로 시작, 이후 회복이 양호하면 4~6km. 12/2·1/6·하프 전후 주·테이퍼 후반에는 휴식</td></tr>
+<tr><td>목</td><td>이지런 기본 · 12/10은 수요일 거리만큼 줄여 5km · 1/7에만 두 번째 NSM 선택 · MP 롱런 주에는 이지</td></tr>
+<tr><td>토</td><td>이지런 또는 가벼운 트레일 · 1/23만 10km 점검</td></tr>
+<tr><td>일</td><td>롱런 또는 레이스 · 10km 점검 다음 날은 짧은 회복 조깅</td></tr>
+</tbody></table></div>
+<div class="rule"><b>수요일 추가 기준</b> 전날 훈련 뒤 통증이 없고 수면과 다리 상태가 평소 수준일 때만 대화 가능한 강도로 달립니다. 6:45~7:15/km와 140bpm 이하는 참고값입니다. 주 4회가 아직 버겁거나 피로가 남으면 수요일은 쉬고, 빠진 거리는 다른 날에 합산하지 않습니다.</div>
+</section>
+<section>
+  <div class="shead"><h2>훈련 페이스</h2><span class="tag">10km 47:00 · 역치 174bpm · 최대 191bpm</span></div>
+<div class="tbox"><table><thead><tr><th scope="col">구분</th><th scope="col">페이스 참고</th><th scope="col">심박 참고</th><th scope="col">실행 기준</th></tr></thead><tbody>
+<tr><td>회복 조깅</td><td>6:45~7:30/km 또는 더 느리게</td><td>대략 120~140bpm</td><td>걷기와 계단이 편할 때 시작 · 편한 대화</td></tr>
+<tr><td>이지런 / 이지 롱런</td><td>6:20~6:50 / 6:10~6:40/km</td><td>대략 135~150bpm</td><td>문장으로 대화 가능 · 오르막과 피로 시 감속</td></tr>
+<tr class="hi"><td>NSM 4~6분 반복</td><td>5:08~5:25/km</td><td>도입 155~165bpm</td><td>일정의 느린 쪽에서 시작 · 겨울철 추위·바람 시 시계 페이스보다 RPE 4~5/10 우선</td></tr>
+<tr class="hi"><td>NSM 8~9분 반복</td><td>5:10~5:22/km</td><td>도입 155~165 · 적응 후 160~168bpm</td><td>후반 심박(168bpm 이하)과 RPE 4~5/10 우선 · 한 세트 더 할 여유</td></tr>
+<tr><td>기본 목표 MP</td><td>5:12/km 전후</td><td>초중반 155~165bpm 참고</td><td>리허설에 적용 · 체감이 높아지면 이지로 전환</td></tr>
+<tr><td>도전 목표 레이스 페이스</td><td>4:59/km 전후</td><td>훈련으로 확인</td><td>하프·장거리·회복 기준을 함께 충족할 때 검토</td></tr>
+</tbody></table></div>
+<div class="rule"><b>NSM은 통제된 서브역치 반복주입니다.</b> 10km 47:00의 평균은 4:42/km입니다. 표의 페이스와 심박은 이를 참고한 개인 시작값이며, 174bpm은 추정 역치입니다. 도입 범위는 최대심박 191의 약 81~86%, 적응 범위는 약 84~88%입니다. 심박 반응이 늦은 짧은 반복에서는 속도를 끌어올려 숫자를 맞추지 않습니다. 영하권 추위·강풍·두꺼운 복장에서는 시계 페이스를 억지로 맞추지 말고 체감(RPE 4~5/10)을 우선하고 후반 심박(168bpm 이하)은 참고해 속도를 조절합니다. 후반 심박이 168을 계속 넘거나 호흡이 거칠어지면 감속하고, 174에 가까워지는 추세가 이어지면 반복을 종료합니다. <a href="https://runtangents.substack.com/p/how-running-slow-helps-you-run-fast">NSM 강도 조절 · James Copeland 인터뷰</a></div>
+<div class="rule"><b>거리 맞추는 법</b> 이지 2km로 준비하고 반복 사이에만 표시된 시간만큼 아주 느리게 조깅합니다. 마지막 반복 뒤에는 이지 조깅으로 마무리합니다. 세션의 표기 거리에 워밍업·반복·회복·쿨다운이 모두 들어갑니다. 쿨다운 1km 이상이 남지 않을 것 같으면 마지막 반복을 줄이거나 생략합니다.</div>
+</section>
+<section>
+  <div class="shead"><h2>20주 구조</h2><span class="tag">2026년 11월 → 2027년 3월</span></div>
+<div class="tbox"><table><thead><tr><th scope="col">기간</th><th scope="col">주차</th><th scope="col">단계</th><th scope="col">주간 거리¹</th><th scope="col">최장 이지·롱런</th><th scope="col">목표</th></tr></thead><tbody>
+<tr><td>11/02–11/29</td><td>R1–R4</td><td>회복</td><td>7~37km</td><td>14km</td><td>JTBC 회복 · 이지런 복귀</td></tr>
+<tr><td>11/30–12/27</td><td>W1–W4</td><td>베이스</td><td>41~52km</td><td>20km</td><td>주 1회 NSM · 둘째 주부터 수요일 선택</td></tr>
+<tr><td>12/28–01/31</td><td>W5–W9</td><td>강화</td><td>37~56km</td><td>24km</td><td>NSM 1회 기본(조건부 2회) · 주중 볼륨 분산 · 10km 점검</td></tr>
+<tr><td>02/01–02/28</td><td>W10–W13</td><td>특이성</td><td>39.0975~59km</td><td>27km</td><td>하프와 회복 · MP 5km 후 회복에 따라 9km 선택 · 피크 59km 상한</td></tr>
+<tr><td>03/01–03/21</td><td>W14–W16</td><td>테이퍼</td><td>12~42km</td><td>17km</td><td>W14 주 5회 → W15–W16 주 4회 감량 · 풀코스</td></tr>
+</tbody></table></div><p class="lede">¹ 요약은 일자별 표기 거리 기준입니다. 선택 조깅·리허설을 줄이면 실제 거리가 줄어듭니다. 하프는 21.0975km로 합산합니다. 3월 범위는 풀코스 당일 거리를 뺀 훈련 거리입니다. W16 카드에는 풀코스 포함 합계도 표시합니다. 월 경계의 거리 합계는 각 훈련 날짜의 월에 반영합니다.</p>
+</section>
+<section>
+  <div class="shead"><h2>보강운동 루틴</h2><span class="tag">회복이 좋은 주에만 · 선택</span></div>
+  <div class="cards">
+    <div class="card">
+      <h3>A · 하체 근력 (30분)</h3>
+      <ul>
+        <li>백스쿼트 또는 고블릿 스쿼트 3×12</li>
+        <li>불가리안 스플릿 스쿼트 3×10 (다리별)</li>
+        <li>루마니안 데드리프트 3×10</li>
+        <li>스텝업 (박스 40cm) 3×12</li>
+        <li>스탠딩 카프레이즈 3×20</li>
+      </ul>
+      <p class="dd" style="margin-top:8px">11월 중순부터 가벼운 무게와 적은 세트로 복귀합니다. 하프 직후와 피크 롱런·테이퍼 주에는 가동성으로 전환합니다.</p>
+    </div>
+    <div class="card">
+      <h3>B · 코어·안정성 (20분)</h3>
+      <ul>
+        <li>플랭크 60초 × 3</li>
+        <li>사이드 플랭크 40초 × 2 (좌우)</li>
+        <li>버드독 10회 × 3</li>
+        <li>글루트 브릿지 15회 × 3</li>
+        <li>클램쉘 (밴드) 15회 × 3</li>
+        <li>싱글레그 밸런스 45초 × 2</li>
+      </ul>
+      <p class="dd" style="margin-top:8px">근육통이 남지 않을 정도로만 합니다. 레이스 주에는 가동성 위주로 가볍게 움직입니다.</p>
+    </div>
+    <div class="card">
+      <h3>C · 가동성·회복 (15분)</h3>
+      <ul>
+        <li>폼롤러 — 대퇴사두·IT밴드·둔근·종아리</li>
+        <li>90/90 힙 스트레칭 좌우 60초</li>
+        <li>발목 도르시플렉션 15회 × 2</li>
+        <li>흉추 회전 10회 × 2</li>
+        <li>종아리 벽 스트레칭 60초 × 2</li>
+      </ul>
+      <p class="dd" style="margin-top:8px">회복주와 테이퍼 기간의 기본. 근력 세션을 대체합니다.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="shead"><h2>업힐 · 트레일 운용</h2><span class="tag">12월과 1월 초</span></div>
+<div class="rule"><b>토요일 트레일</b> 12/5·12/12·12/19·1/2에 원본의 트레일 요소를 남겼습니다. 완만한 경사에서 편하게 달리고, 급경사는 걷습니다. 내리막에서는 속도를 낮추고 결빙·피로가 있으면 로드 이지런으로 바꿉니다.</div>
+<div class="rule"><b>업힐 자극</b> 12월과 1월의 빠른 오르막 반복을 평지 NSM으로 바꿨습니다. 트레일의 완만한 오르막에서 보폭을 줄이고 일요일 롱런에 피로가 남지 않게 조절합니다.</div>
+</section>
+<section>
+  <div class="shead"><h2>보급 · 장비 프로토콜</h2><span class="tag">장거리에서 실전 연습</span></div>
+<div class="rule"><b>보급 연습</b> 90분 이상 롱런에서 젤·물·스포츠음료를 미리 시험합니다. 원본의 레이스 젤 지점 8·15·22·29·35km는 참고값입니다. 제품의 탄수화물 양, 급수 위치, 소화 상태에 맞춰 연습합니다.</div>
+<div class="rule"><b>레이스화와 복장</b> 2/21 1차 MP 롱런(후반 5km), 2/28 2차 리허설(후반 MP 최대 9km), 3/9 짧은 MP에서 이미 적응한 신발을 점검합니다. 2/28에는 양말·벨트·보급까지 맞춰 보고 쓸림과 위장 반응을 확인합니다.</div>
+<div class="rule"><b>롱런과 주간 거리 상한</b> 2/28은 27km와 2시간 45분 중 먼저 도달하는 쪽에서 마칩니다. 59km는 수요일을 포함한 피크 상한입니다. 피로가 있으면 수요일을 먼저 쉬고, 주말까지 피로가 남으면 롱런을 이지 22~24km 이하로 낮춥니다.</div>
+</section>
+<section>
+  <div class="shead"><h2>중간 점검 · 중단 기준</h2><span class="tag">회복에 따라 세션 조절</span></div>
+<div class="tbox"><table><thead><tr><th scope="col">시점</th><th scope="col">확인할 것</th><th scope="col">다음 결정</th></tr></thead><tbody>
+<tr><td>11월 복귀</td><td>걷기·계단·짧은 조깅 중 불편이 없고 다음 날 통증이나 피로가 늘지 않음</td><td>조건을 충족한 뒤 조깅부터 시작. 미충족 시 휴식 또는 편한 걷기</td></tr>
+<tr><td>1/7 두 번째 NSM</td><td>직전 2주에 주 1회 NSM을 여유 있게 마쳤고, 화요일 이후 이틀 동안 수면·다리 상태가 평소 수준</td><td>수요일은 휴식. 두 조건을 충족하면 목요일 3×4분과 일요일 이지 20km. 그 외에는 목요일 이지와 일요일 이지 22km</td></tr>
+<tr><td>1/23 10km · 2/7 하프</td><td>기본 목표 참고점은 10km 45~47분대, 하프 1:43~1:46 전후. 코스와 날씨, 후반 페이스도 함께 확인</td><td>기록 하나로 목표를 올리지 않습니다. 하프 다음 날은 쉬고 화요일은 상태에 따라 조깅 또는 휴식</td></tr>
+<tr><td>2/21 · 2/28 MP 리허설</td><td>2/21 후반 MP 5km(5:12/km 전후)에서 호흡·폼·보급에 여유가 있고 다음 1~2일 회복 양호</td><td>충족하면 2/28 후반 MP 9km 선택. 회복이 애매하면 5~6km, 피로가 남으면 이지 22~24km 이하. 기본 MP가 힘겹거나 회복이 늦으면 3:40 출발 페이스를 낮춥니다.</td></tr>
+<tr><td>3:30 도전 검토</td><td>하프 1:40 안팎 또는 더 빠른 기록, 후반 감속이 적었던 장거리, 안정적 보급과 빠른 회복을 함께 확인</td><td>2/28의 5:12/km 리허설은 3:40의 참고 자료입니다. 하프 기록과 장거리 후반 지속력에서 모두 개선이 확인될 때 3:30을 검토합니다.</td></tr>
+</tbody></table></div>
+<div class="rule"><b>회복 신호</b> 아침 안정시 심박이 개인 평소보다 약 5~7bpm 높게 이어지거나 수면 저하와 다리 무거움이 함께 나타나면 NSM·MP를 이지 또는 휴식으로 바꿉니다. 이지 강도에서 평소보다 호흡이 힘들면 거리도 줄입니다. 완주 후 회복 속도에는 개인차가 있습니다. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5613699/">생활체육 러너의 마라톤 후 회복 연구</a></div>
+<div class="rule"><b>중단 신호</b> 달리며 통증이 커지거나 보행·러닝 자세가 달라지면 중단합니다. 통증이 지속되거나 일상 보행에 지장이 있으면 진료를 받으세요.</div>
+</section>
+<section>
+  <div class="shead"><h2>레이스 당일 페이스</h2><span class="tag">2027.03.21 · 풀코스 42.195km</span></div>
+<div class="tbox"><table><thead><tr><th scope="col">거리</th><th scope="col">기본 구간 / 누적</th><th scope="col">도전 구간 / 누적</th></tr></thead><tbody>
+<tr><td>0–10km</td><td>52:40 / 52:40</td><td>50:15 / 50:15</td></tr>
+<tr><td>10–20km</td><td>51:50 / 1:44:30</td><td>49:35 / 1:39:50</td></tr>
+<tr><td>20–30km</td><td>51:50 / 2:36:20</td><td>49:35 / 2:29:25</td></tr>
+<tr><td>30–40km</td><td>52:10 / 3:28:30</td><td>49:40 / 3:19:05</td></tr>
+<tr class="hi"><td>40–42.195km</td><td>11:30 / 3:40:00</td><td>10:55 / 3:30:00</td></tr>
+</tbody></table></div>
+<div class="rule"><b>초반 페이스</b> 풀코스 목표의 정확한 평균은 3:40 기준 약 5:12.8/km, 3:30 기준 약 4:58.6/km입니다. 첫 10km는 체감과 호흡을 기준으로 억제합니다. 바람·경사·혼잡으로 밀린 시간은 한 번에 만회하지 않습니다.</div>
+</section>
+  </details>
+  <footer>훈련 원본 · 2027_20_nsm.html / 20주 NSM 코치 조정판</footer>
+</main>
+
+<dialog id="dayDialog" aria-labelledby="dayHeading">
+  <div class="row"><p class="overline" id="dayDate"></p><button type="button" data-close autofocus>닫기</button></div>
+  <h2 id="dayHeading"></h2>
+  <div id="dayPlan"></div>
+  <div id="dayChoices" class="choice-list"></div>
+  <form id="logForm">
+    <hr>
+    <fieldset>
+      <legend>훈련 기록</legend>
+      <label class="field">상태
+        <select id="logStatus"><option value="">미기록</option><option value="done">완료</option><option value="skipped">건너뜀</option></select>
+      </label>
+      <div class="fields">
+        <label class="field" id="distanceField">실제 거리 (km)
+          <input id="logDistance" type="number" min="0" max="1000" step="any" inputmode="decimal" placeholder="직접 입력">
+        </label>
+        <label class="field" id="timeField">점검·대회 기록
+          <input id="logTime" type="text" maxlength="8" placeholder="예 1:43:25 또는 46:20">
+        </label>
+      </div>
+      <p class="muted" id="timeHint" hidden>점검 구간이나 대회 기록을 입력하세요. 실제 거리는 워밍업·쿨다운을 포함해 달린 총거리입니다.</p>
+      <p class="muted" id="timeNotice" hidden>시간 기록은 점검·대회 날에만 입력할 수 있어요.</p>
+      <label class="field">메모
+        <textarea id="logNote" maxlength="800" rows="2" placeholder="체감 강도, 보급, 다음 날 회복 등"></textarea>
+      </label>
+    </fieldset>
+    <p id="logError" class="error" role="alert" hidden></p>
+    <button type="submit" class="primary">기록 저장</button>
+  </form>
+</dialog>
+
+<dialog id="backupDialog" aria-labelledby="backupTitle">
+  <div class="row"><h2 id="backupTitle">기록 백업 · 복원</h2><button type="button" data-close autofocus>닫기</button></div>
+  <p class="detail-copy">다운로드한 JSON 파일을 보관하세요. 복원하면 현재 일정 선택과 기록 전체를 백업 내용으로 대체합니다.</p>
+  <div class="controls">
+    <button type="button" class="primary" id="download">JSON 다운로드</button>
+    <button type="button" id="loadFile">백업 파일 열기</button>
+    <input type="file" id="backupFile" accept=".json,application/json" hidden>
+  </div>
+  <label for="backupText" class="field">또는 JSON 붙여넣기</label>
+  <textarea id="backupText" rows="5" spellcheck="false"></textarea>
+  <p id="backupMessage" class="detail-copy" role="status"></p>
+  <button type="button" id="restore">백업 검사</button>
+</dialog>
+<script>
+const WEEKS=[
+{"w":"R1","m":"11월","ph":"회복","s":"2026-11-02","note":"풀 완주 직후. 걷기·계단이 편해진 뒤에만 주말 조깅을 하나씩 시도합니다.","d":[["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","보강 없음"],["E",3,"회복 조깅","선택 · 20~25분 이내 · 평지, 아주 편하게"],["E",4,"회복 조깅","선택 · 토요일 저녁과 일요일 아침에 통증·피로가 늘지 않았을 때만"]]},
+{"w":"R2","m":"11월","ph":"회복","s":"2026-11-09","note":"회복을 우선하며 몸 상태에 따라 토요일 이지런은 생략해도 됩니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",5,"이지런","6:50~7:20/km 참고 · 평지"],["S",0,"선택 · 코어 또는 가동성","10~20분 · 달리기 없음"],["E",6,"이지런","편하게 대화할 수 있는 강도로 6km를 달립니다. 페이스는 6:45~7:15/km를 참고하세요."],["X",0,"휴식","편하게 쉬면서 컨디션을 회복합니다."],["E",5,"이지런","선택 · 피로하거나 잠이 부족하면 쉬어도 됩니다."],["E",7,"이지런","6:40~7:10/km 참고 · 전 구간 편하게"]]},
+{"w":"R3","m":"11월","ph":"회복","s":"2026-11-16","note":"이지런 뒤 다음 날까지 편안하면 가벼운 근력 운동을 다시 시작합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["E",7,"이지런","6:40~7:00/km 참고"],["S",0,"선택 · 코어 또는 가동성","10~20분 · 달리기 없음"],["E",8,"이지런","6:35~7:00/km 참고"],["X",0,"휴식",""],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",10,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"R4","m":"11월","ph":"회복","s":"2026-11-23","note":"11월은 회복과 거리 적응에 집중합니다. 일요일도 편안한 호흡을 유지합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["S",0,"선택 · 코어 또는 가동성","10~20분 · 달리기 없음"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",14,"롱런","6:20~6:50/km · 피로가 남으면 10~12km"]]},
+{"w":"W1","m":"12월","ph":"베이스","s":"2026-11-30","note":"첫 NSM 적응 주. 이번 주는 주 4회 41km로 시작하고 수요일은 쉽니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",8,"NSM 3×5분","5:15~5:25/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["X",0,"휴식","첫 NSM 다음 날. 편하면 가볍게 걷거나 가동성 운동"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",16,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W2","m":"12월","ph":"베이스","s":"2026-12-07","note":"W1을 소화한 뒤 다리와 수면 상태가 평소 수준이면 수요일 이지런을 20~30분 도입합니다. 목요일은 5km로 줄여 수·목 합계가 기존 목요일 9km를 넘지 않게 합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",9,"NSM 3×6분","5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",4,"수요일 첫 이지런 · 선택","20~30분, 최대 4km. 문장으로 대화 가능한 강도 · 화요일 NSM 피로가 남으면 휴식"],["E",5,"이지런 · 거리 재배분","6:20~6:50/km 참고 · 수요일에 쉬었어도 목요일은 5km로 마무리"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",18,"롱런","전 구간 이지 · 젤과 급수 타이밍 연습"]],"options":[["수요일 생략",[[2,0]]]]},
+{"w":"W3","m":"12월","ph":"베이스","s":"2026-12-14","note":"20km 롱런 진입 주. 지난주 수요일 조깅을 편하게 소화하고 다음 날까지 회복이 양호했다면 수요일을 최대 5km로 늘립니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 4×6분","5:10~5:20/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",5,"회복 조깅 · 선택","지난주 20~30분이 편했을 때만 최대 5km. 주 5회 첫 시도라면 20~30분, 최대 4km. 피로하면 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",20,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W4","m":"12월","ph":"베이스","s":"2026-12-21","note":"연말 감량 주. 수요일 회복 조깅도 4km로 줄이고 연말 일정에 맞춰 유연하게 쉽니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["NSM",8,"NSM 3×5분","5:15~5:25/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",4,"회복 조깅 · 선택","6:45~7:15/km · 30분 이내 가볍게 · 연말 일정이나 피로 시 0km 휴식"],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",16,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W5","m":"1월","ph":"강화","s":"2026-12-28","note":"연말과 1월에 걸친 강화 첫 주. 12/29 NSM 3×8분 뒤 수요일 회복 조깅으로 이어갑니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×8분","5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",5,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",20,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W6","m":"1월","ph":"강화","s":"2027-01-04","note":"화요일 NSM 1회가 기본입니다. 목요일 2회차는 1/7 조건을 모두 충족할 때만 선택합니다. 수요일은 쉬고, 2회차를 선택하면 일요일은 20km 이지로 줄입니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×9분","5:10~5:20/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["X",0,"휴식","화요일 NSM 후 회복. 가벼운 가동성 운동은 가능"],["E",9,"이지런 · 조건부 NSM으로 대체 가능","기본 이지 9km. 직전 2주 NSM에 여유가 있었고 화요일 이후 이틀간 수면·다리가 평소 수준일 때만 NSM 3×4분. 5:12~5:22/km, 반복 후반 155~165bpm 참고, 사이 90초 조깅. 이지 2km로 시작하고 쿨다운 포함 총 9km."],["X",0,"휴식",""],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",22,"이지 롱런","목요일이 이지였다면 22km. 목요일에 NSM을 했다면 20km. 전 구간 대화 가능한 강도"]],"options":[["목요일 NSM + 일요일 20km",[[6,20]]]]},
+{"w":"W7","m":"1월","ph":"강화","s":"2027-01-11","note":"수요일 6km 회복 조깅으로 목요일을 10km로 낮추면서 주간 56km(롱런 비중 43%)를 달성합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 5×5분","5:08~5:18/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",6,"이지런","6:35~7:00/km · 일요일 대비"],["L",24,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W8","m":"1월","ph":"강화","s":"2027-01-18","note":"1/23 10km 점검이 이번 주 유일한 강한 세션입니다. 주중은 짧은 이지와 회복 조깅으로 다리를 아낍니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["E",4,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 가볍게 · 피로 시 0km 휴식"],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식","테스트 전날. 완전 휴식"],["R",14,"10km 기록 점검","워밍업 3km + 10km 기록 측정 + 쿨다운 1km"],["E",6,"회복 조깅","6:45~7:15/km · 전날 여파가 있으면 산책 또는 휴식"]]},
+{"w":"W9","m":"1월","ph":"강화","s":"2027-01-25","note":"하프를 앞둔 마지막 NSM. 수요일 6km 회복 조깅으로 목·토 이지런을 각 9km로 편안하게 배분합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×9분","5:10~5:20/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",22,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W10","m":"2월","ph":"특이성","s":"2027-02-01","note":"2/7 하프가 이번 주 유일한 강한 세션입니다. 참가 대회·코스는 별도 확인합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",4,"가벼운 조깅","6:40~7:15/km · 피로하면 휴식"],["R",21.0975,"하프 기록 점검","참가 확정 및 회복 양호 시 실시. 미확정이면 16~18km 이지로 대체. 대회 전 가동성·걷기와 완주 후 걷기는 거리 합계에서 제외"]]},
+{"w":"W11","m":"2월","ph":"특이성","s":"2027-02-08","note":"2/8은 휴식. 2/9도 회복이 확인된 경우에만 가볍게 달립니다. 이번 주 MP·NSM은 쉽니다.","d":[["X",0,"하프 다음 날 휴식","달리기와 하체 근력은 쉬고, 편하면 가볍게 걷기"],["E",5,"하프 후 회복 조깅","선택 · 6:45~7:15/km · 근육통이나 보행 불편이 남으면 휴식"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["E",8,"이지런","대화 가능한 강도 · 화요일을 건너뛰었다면 5~6km부터"],["X",0,"휴식","하프 회복 주. 일요일 이지 롱런을 앞두고 휴식"],["E",5,"이지런","6:35~7:00/km · 아주 편하게"],["L",22,"롱런","전 구간 이지 · 하프 피로가 남으면 16~18km 또는 휴식"]]},
+{"w":"W12","m":"2월","ph":"특이성","s":"2027-02-15","note":"1차 MP 롱런 주. 하프와 2/14 롱런의 피로가 풀렸다면 24km 중 마지막 5km를 기본 목표 MP로 달립니다. 피로가 남으면 MP를 빼고 일요일 거리를 줄입니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",9,"이지런","6:20~6:50/km 참고 · 1차 MP 롱런에 대비해 편하게"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",24,"1차 MP 적응 롱런","이지 19km + 기본 MP 5km(5:12/km 전후). 호흡·폼·보급에 여유가 있는지 확인합니다. 하프나 직전 롱런의 피로가 남으면 이지 20~22km로 전환하고, 피로가 크면 더 줄이거나 쉽니다."]],"options":[["일요일 이지 20~22km",[[6,[20,22]]]],["수요일 휴식 + 일요일 이지 20~22km",[[2,0],[6,[20,22]]]]]},
+{"w":"W13","m":"2월","ph":"특이성","s":"2027-02-22","note":"피크 상한 59km. 2/21의 후반 MP 5km가 여유로웠고 이후 1~2일 동안 수면·다리 상태와 이지런 체감이 평소 수준으로 돌아왔을 때만 후반 MP 9km를 선택합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡 · 주간 볼륨 분산"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡 · 주간 볼륨 분산"],["X",0,"휴식","완전 휴식"],["E",6,"이지런","6:35~7:00/km · 일요일 대비"],["L",27,"2차 레이스 리허설 롱런 · MP 9km는 조건부","조건 충족 시 이지 18km + 기본 MP 9km(5:12/km 전후). 회복이 애매하지만 이지 구간이 편안하면 MP는 5~6km까지만. 피로가 남으면 이지 22~24km 또는 더 짧게. 어떤 경우든 27km와 2시간 45분 중 먼저 도달할 때 종료합니다."]],"options":[["수요일 휴식 + 일요일 27km",[[2,0]]],["일요일 이지 22~24km",[[6,[22,24]]]],["수요일 휴식 + 일요일 이지 22~24km",[[2,0],[6,[22,24]]]]]},
+{"w":"W14","m":"3월","ph":"테이퍼","s":"2027-03-01","note":"테이퍼 1주차(주 5회 마지막 주). 빈도는 유지하되 전체 볼륨을 줄이고, 다음 주부터 주 4회로 전환합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["NSM",8,"NSM 3×4분 · 선택","선택 · 조건 미충족 시 같은 거리 이지런. 5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",5,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 · 피로 시 0km 휴식"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",5,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",17,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W15","m":"3월","ph":"테이퍼","s":"2027-03-08","note":"테이퍼 2주차. 짧은 MP 한 번과 가벼운 롱런으로 마무리합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["MP",8,"마라톤 페이스","이지 3km + MP 3km(5:12/km 전후) + 이지 2km. 레이스화 최종 점검"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",3,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",11,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
+{"w":"W16","m":"3월","ph":"레이스","s":"2027-03-15","note":"테이퍼 마지막 주. 대회 전 훈련은 12km이며 주간 합계에는 풀코스도 포함됩니다.","d":[["X",0,"휴식","장비 점검 — 신발·양말·복장·젤·배번"],["E",5,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["MP",5,"마라톤 페이스","이지 2km + MP 1km(5:12/km 전후) + 이지 2km. 피로하면 전 구간 이지"],["X",0,"휴식","탄수화물 로딩 시작"],["E",2,"레이스 전 조깅","아주 가볍게 · 다리가 무거우면 휴식"],["R",42.195,"서울마라톤 풀코스","기본 3:40 · 도전 3:30은 사전 검증 시 선택. 초반은 계획보다 힘들면 속도를 낮추기"]]}
+];
+ "use strict";
+
+const $ = id => document.getElementById(id);
+const escape = value => String(value).replace(/[&<>"']/g, char => ({
+  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+})[char]);
+const seoulDateString = date =>
+  new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"}).format(date);
+const addDays = (iso, days) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+};
+const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+const shortDate = iso => iso.slice(5).replace("-", "/");
+const longDate = iso => iso.replaceAll("-", ".") + " (" + weekdays[new Date(iso + "T00:00:00Z").getUTCDay()] + ")";
+const today = seoulDateString(new Date());
+const dates = new Map();
+const weeks = new Map(WEEKS.map(week => [week.w, week]));
+for (const week of WEEKS) {
+  week.days = week.d.map(([type, km, title, detail], index) => {
+    const date = addDays(week.s, index);
+    const optional = km > 0 && (title.includes("· 선택") || detail.startsWith("선택 ·"))
+      && date !== "2027-03-02"; // 이 날은 강도만 선택이며 8km 이지런이 대체안이다.
+    const day = {date, week:week.w, type, km, title, detail, optional};
+    dates.set(date, day);
+    return day;
+  });
+}
+const first = WEEKS[0].s;
+const race = WEEKS.at(-1).days.at(-1).date;
+const focusDate = today < first ? first : today > race ? race : today;
+const currentWeek = dates.get(focusDate).week;
+const months = [...new Set([...dates.keys()].map(date => date.slice(0, 7)))];
+const monthlyDays = new Map(months.map(month => [month, [...dates.values()].filter(day => day.date.startsWith(month))]));
+const monthLabel = month => Number(month.slice(5)) + "월";
+const milestoneNames = Object.fromEntries(
+  [...dates.values()].filter(day => day.type === "R").map(day => [day.date, day.title])
+);
+const w12last = weeks.get("W12")?.days.at(-1);
+const w13last = weeks.get("W13")?.days.at(-1);
+if (w12last) milestoneNames[w12last.date] = "1차 MP 롱런";
+if (w13last) milestoneNames[w13last.date] = "2차 MP 롱런";
+
+// Each option is an overlay on the original plan. Actual logs are stored separately.
+const choices = new Map();
+const makeChoice = (date, label, alternatives) => choices.set(date, {
+  label, options:[{label:"원본 계획", changes:{}}, ...alternatives]
+});
+const alternative = (label, changes) => ({label, changes});
+const rest = {type:"X", km:0, title:"휴식으로 조정", detail:"원본의 선택·회복 조건에 따라 휴식으로 조정했습니다."};
+for (const day of dates.values()) {
+  if (day.optional) makeChoice(day.date, "선택 조깅", [alternative("휴식", {[day.date]:rest})]);
+}
+makeChoice("2026-11-29", "롱런 거리", [
+  alternative("이지 10~12km", {"2026-11-29":{km:[10,12], title:"거리 줄인 이지 롱런"}})
+]);
+makeChoice("2027-01-07", "두 번째 NSM · 직전 2주와 화요일 이후 회복 조건 확인", [
+  alternative("목요일 NSM 3×4분 + 일요일 이지 20km", {
+    "2027-01-07":{type:"NSM", title:"NSM 3×4분 · 조건 충족 시"},
+    "2027-01-10":{km:20, title:"이지 롱런 20km · 목요일 NSM 연동"}
+  })
+]);
+makeChoice("2027-02-06", "하프 전날 조깅", [alternative("휴식", {"2027-02-06":rest})]);
+makeChoice("2027-02-07", "하프 참가 여부와 회복 상태", [
+  alternative("이지 16~18km", {"2027-02-07":{type:"E", km:[16,18], title:"하프 대신 이지런"}})
+]);
+makeChoice("2027-02-14", "하프 이후 롱런", [
+  alternative("이지 16~18km", {"2027-02-14":{km:[16,18], title:"거리 줄인 이지 롱런"}}),
+  alternative("휴식", {"2027-02-14":rest})
+]);
+makeChoice("2027-02-21", "1차 MP 롱런 · 하프와 직전 롱런 회복 확인", [
+  alternative("이지 20~22km", {"2027-02-21":{km:[20,22], title:"MP 없이 이지 롱런"}}),
+  alternative("휴식", {"2027-02-21":rest})
+]);
+makeChoice("2027-02-28", "2차 MP 롱런 · 2/21 결과와 이후 회복 확인", [
+  alternative("후반 MP를 5~6km로 줄임", {"2027-02-28":{title:"2차 롱런 · 후반 MP 5~6km", detail:"회복이 애매하지만 이지 구간이 편안할 때 적용. 총 27km와 2시간 45분 중 먼저 도달하면 종료합니다."}}),
+  alternative("이지 22~24km", {"2027-02-28":{km:[22,24], title:"MP 없이 이지 롱런", detail:"피로가 남으면 더 짧게 달립니다. 2시간 45분 상한을 지킵니다."}})
+]);
+makeChoice("2027-03-02", "테이퍼 NSM 강도", [
+  alternative("같은 거리 이지런", {"2027-03-02":{type:"E", title:"이지런 8km", detail:"원본의 대체안 · 같은 거리를 이지 강도로 달립니다."}})
+]);
+makeChoice("2027-03-18", "레이스 전 마라톤 페이스", [
+  alternative("같은 거리 이지런", {"2027-03-18":{type:"E", title:"이지런 5km", detail:"원본의 대체안 · 전 구간을 이지 강도로 달립니다."}})
+]);
+makeChoice("2027-03-20", "레이스 전 조깅", [alternative("휴식", {"2027-03-20":rest})]);
+for (const [choiceDate, choice] of choices) {
+  for (const option of choice.options.slice(1)) {
+    for (const date of Object.keys(option.changes)) {
+      if (!dates.has(date)) console.warn("선택 옵션에 알 수 없는 날짜:", date, "(기준 날짜:", choiceDate + ")");
+    }
+  }
+}
+const choiceDatesByDay = new Map();
+for (const [date, choice] of choices) {
+  const affected = new Set([date, ...choice.options.flatMap(option => Object.keys(option.changes))]);
+  for (const day of affected) {
+    if (!choiceDatesByDay.has(day)) choiceDatesByDay.set(day, []);
+    choiceDatesByDay.get(day).push(date);
+  }
+}
+
+const key = "donga-2027-nsm-calendar-v1";
+const emptyState = () => ({format:key, selections:{}, logs:{}});
+const isObject = value => value !== null && typeof value === "object" && !Array.isArray(value);
+const timePattern = /^(?:\d{1,2}:)?[0-5]?\d:[0-5]\d$/;
+const validTime = time => timePattern.test(time) && time.split(":").some(part => Number(part) > 0);
+function parseBackup(raw) {
+  const data = JSON.parse(raw);
+  if (!isObject(data) || data.format !== key || !isObject(data.selections) || !isObject(data.logs)) {
+    throw new Error("이 캘린더의 백업 형식이 아닙니다.");
+  }
+  const clean = emptyState();
+  for (const [date, index] of Object.entries(data.selections)) {
+    if (!choices.has(date) || !Number.isInteger(index) || index < 1 || index >= choices.get(date).options.length) {
+      throw new Error("알 수 없는 일정 선택이 있습니다.");
+    }
+    clean.selections[date] = index;
+  }
+  for (const [date, log] of Object.entries(data.logs)) {
+    if (!dates.has(date) || !isObject(log) || !["", "done", "skipped"].includes(log.status)
+      || !(log.km === null || (log.status === "done" && dates.get(date).km > 0 && Number.isFinite(log.km) && log.km >= 0 && log.km <= 1000))
+      || typeof log.time !== "string" || (log.time && (log.status !== "done" || !Object.hasOwn(milestoneNames, date) || !validTime(log.time)))
+      || typeof log.note !== "string" || log.note.length > 800) {
+      throw new Error("날짜 또는 기록 값이 올바르지 않습니다.");
+    }
+    clean.logs[date] = {status:log.status, km:log.km, time:log.time, note:log.note};
+  }
+  return clean;
+}
+
+let state = emptyState();
+let storageNote = "";
+try {
+  const raw = localStorage.getItem(key);
+  if (raw) state = parseBackup(raw);
+} catch {
+  storageNote = "저장된 기록을 불러올 수 없습니다. 보관한 백업이 있다면 복원할 수 있습니다.";
+}
+function save(next, message) {
+  state = next;
+  try {
+    localStorage.setItem(key, JSON.stringify(state));
+    storageNote = "";
+  } catch {
+    storageNote = "브라우저 저장이 제한되어 있습니다. 페이지를 닫기 전에 백업을 다운로드하세요.";
+  }
+  $("notice").textContent = [message, storageNote].filter(Boolean).join(" ");
+}
+$("notice").textContent = storageNote;
+
+function selectedDay(day) {
+  for (const choiceDate of choiceDatesByDay.get(day.date) || []) {
+    const option = choices.get(choiceDate).options[state.selections[choiceDate] || 0];
+    if (option.changes[day.date]) return {...day, ...option.changes[day.date], adjusted:true};
+  }
+  return day;
+}
+
+const toUnits = km => Math.round(km * 10000);
+const kmText = (km, digits = 1) => Number(km.toFixed(digits)).toLocaleString("ko-KR", {maximumFractionDigits:digits});
+const bounds = km => Array.isArray(km) ? km : [km, km]; // km은 숫자(고정 거리) 또는 [min, max] 배열(범위) — 두 형태 모두 의도적
+const rangeText = (min, max, digits) => min === max ? kmText(min, digits) : kmText(min, digits) + "~" + kmText(max, digits);
+const dayKm = km => rangeText(...bounds(km), 4) + " km";
+function badge(plan) {
+  if (plan.type === "R") {
+    const isRace = plan.date === race;
+    const label = isRace ? "대회" : "점검";
+    return '<span class="badge b-' + (isRace ? "race" : "check") + '">' + label + "</span>";
+  }
+  if (plan.type === "L" && Object.hasOwn(milestoneNames, plan.date)) {
+    return '<span class="badge b-L">L</span> <span class="badge b-check">점검</span>';
+  }
+  return '<span class="badge b-' + plan.type + '">' + plan.type + "</span>";
+}
+const statusName = log => log?.status === "done" ? "완료" : log?.status === "skipped" ? "건너뜀" : "";
+function summarize(days) {
+  let original = 0, min = 0, max = 0, actual = 0, recorded = 0, total = 0, completed = 0;
+  for (const day of days) {
+    const plan = selectedDay(day);
+    const [low, high] = bounds(plan.km);
+    original += toUnits(day.km);
+    min += toUnits(low);
+    max += toUnits(high);
+    const log = state.logs[day.date];
+    if (log?.km != null) {
+      actual += toUnits(log.km);
+      recorded++;
+    }
+    if (day.km > 0 && !day.optional) {
+      total++;
+      if (log?.status === "done") completed++;
+    }
+  }
+  return {
+    original:kmText(original / 10000), planned:rangeText(min / 10000, max / 10000),
+    actual:recorded ? kmText(actual / 10000) : "—", total, completed
+  };
+}
+function metrics(summary) {
+  return '<div class="metrics"><span>원본 <b>' + summary.original + '</b> km</span>'
+    + '<span>선택 반영 <b>' + summary.planned + '</b> km</span><span>실제 <b>' + summary.actual
+    + '</b>' + (summary.actual === "—" ? "" : " km") + "</span></div>";
+}
+function completionText(summary) {
+  if (!summary.total) return "—";
+  return Math.round(summary.completed / summary.total * 100) + "% (" + summary.completed + "/" + summary.total + "회)";
+}
+function dayButton(date, label, primary = false) {
+  return '<button type="button" data-day="' + date + '"' + (primary ? ' class="primary"' : "") + '>' + escape(label) + "</button>";
+}
+
+let activeMonth = focusDate.slice(0, 7);
+let activeDate = null;
+let opener = null;
+function renderOverview() {
+  const diff = (Date.parse(race) - Date.parse(today)) / 86400000;
+  $("dday").textContent = diff > 0 ? "D-" + diff : diff === 0 ? "D-day" : "D+" + Math.abs(diff);
+  $("todayDate").textContent = "오늘 · " + longDate(today);
+  const day = dates.get(today);
+  if (day) {
+    const plan = selectedDay(day);
+    const log = state.logs[today];
+    $("todayHeading").textContent = plan.title;
+    $("today").innerHTML = '<div class="metrics">' + badge(plan) + "<b>" + dayKm(plan.km) + "</b>"
+      + (statusName(log) ? "<span>" + statusName(log) + "</span>" : "") + "</div>"
+      + '<p class="detail-copy">' + escape(plan.detail || "오늘 일정의 상세와 기록을 확인하세요.") + "</p>"
+      + dayButton(today, "오늘 훈련 상세 · 기록", true);
+  } else {
+    $("todayHeading").textContent = today < first ? "훈련 시작 전입니다" : "20주 계획이 끝났습니다";
+    $("today").innerHTML = '<p class="detail-copy">계획 기간 2026.11.02–2027.03.21</p>'
+      + dayButton(focusDate, today < first ? "첫날 일정 보기" : "레이스 기록 보기", true);
+  }
+  const week = weeks.get(currentWeek);
+  const summary = summarize(week.days);
+  $("weekDate").textContent = week.w + " · " + week.ph + " · " + shortDate(week.s) + "–" + shortDate(week.days[6].date);
+  $("weekHeading").textContent = day ? "이번 주" : today < first ? "첫 주" : "마지막 주";
+  $("weekSummary").innerHTML = metrics(summary) + '<p class="detail-copy">주간 실행률 <b>' + completionText(summary) + '</b></p>'
+    + '<p class="detail-copy">' + escape(week.note) + '</p>'
+    + '<button type="button" id="currentOptions">이 주의 훈련 옵션</button>';
+}
+function renderCalendar() {
+  $("months").innerHTML = months.map(month => '<button type="button" data-month="' + month
+    + '" aria-pressed="' + (month === activeMonth) + '">' + monthLabel(month) + "</button>").join("");
+  const summary = summarize(monthlyDays.get(activeMonth));
+  $("monthSummary").textContent = activeMonth.replace("-", "년 ") + "월 · 선택 반영 " + summary.planned
+    + " km · 실제 " + summary.actual + (summary.actual === "—" ? "" : " km");
+  const start = activeMonth + "-01";
+  const pad = new Date(start + "T00:00:00Z").getUTCDay();
+  const daysInMonth = new Date(Date.UTC(Number(start.slice(0,4)), Number(start.slice(5,7)), 0)).getUTCDate();
+  const slots = weekdays.map(label => '<div class="weekday">' + label + "</div>");
+  for (let cell = 0; cell < Math.ceil((pad + daysInMonth) / 7) * 7; cell++) {
+    const date = addDays(start, cell - pad);
+    const day = date.startsWith(activeMonth) && dates.get(date);
+    if (!day) {
+      slots.push('<div class="blank" aria-hidden="true">' + (date.startsWith(activeMonth) ? Number(date.slice(8)) : "") + "</div>");
+      continue;
+    }
+    const plan = selectedDay(day);
+    const log = state.logs[date];
+    const flag = statusName(log) || (plan.adjusted ? "조정됨" : day.optional ? "선택" : "");
+    const category = plan.type === "R" ? (date === race ? "대회 " : "기록 점검 ")
+      : plan.type === "L" && Object.hasOwn(milestoneNames, date) ? "롱런 점검 " : "";
+    const title = longDate(date) + " " + category + plan.title + " " + dayKm(plan.km) + " " + flag;
+    slots.push('<button type="button" data-day="' + date + '" class="day ' + (log?.status || "") + (category ? " race-day" : "")
+      + (date === today ? ' today-cell" aria-current="date' : "") + '" aria-label="' + escape(title) + '">'
+      + '<span class="row"><span class="date-num">' + Number(date.slice(8)) + "</span>" + badge(plan) + "</span>"
+      + '<span class="day-title">' + escape(plan.title) + '</span><span class="distance"><span class="full">'
+      + (bounds(plan.km)[1] > 0 ? dayKm(plan.km) : "") + '</span><span class="small">'
+      + (bounds(plan.km)[1] > 0 ? rangeText(...bounds(plan.km), 1) : "") + "</span></span>"
+      + '<span class="flag">' + flag + "</span></button>");
+  }
+  $("calendar").innerHTML = slots.join("");
+}
+function renderTables() {
+  const rows = (label, summary) => '<th scope="row">' + label + '</th><td class="num">' + summary.original
+    + '</td><td class="num">' + summary.planned + '</td><td class="num">' + summary.actual + "</td>";
+  $("weeklyTable").innerHTML = WEEKS.map(week => {
+    const s = summarize(week.days);
+    return '<tr class="' + (week.w === currentWeek ? "current" : "") + '">'
+      + rows('<button type="button" data-week="' + week.w + '">' + week.w + " · " + week.ph + "</button>"
+        + '<br><span class="muted">' + shortDate(week.s) + "–" + shortDate(week.days[6].date) + "</span>", s)
+      + '<td class="num">' + completionText(s) + "</td></tr>";
+  }).join("");
+  const overall = summarize([...dates.values()]);
+  const elapsed = summarize([...dates.values()].filter(day => day.date <= today));
+  $("progress").textContent = "오늘까지 " + completionText(elapsed) + " · 20주 전체 " + completionText(overall);
+  $("monthlyTable").innerHTML = months.map(month => "<tr>"
+    + rows(monthLabel(month), summarize(monthlyDays.get(month))) + "</tr>").join("")
+    + "<tr>" + rows("20주 합계", overall) + "</tr>";
+  const milestoneGroup = (title, className, entries) => '<div class="milestone-group ' + className + '"><h3><span class="badge b-'
+    + className + '">' + (className === "check" ? "점검" : "대회") + '</span> ' + title + '</h3>' + entries.map(([date, name]) => {
+      const log = state.logs[date];
+      const label = [statusName(log), log?.time, log?.km != null ? kmText(log.km, 4) + " km" : ""].filter(Boolean);
+      return '<div class="milestone">' + dayButton(date, shortDate(date) + " " + name)
+        + "<span>" + (label.length ? escape(label.join(" · ")) : "미기록") + "</span></div>";
+    }).join("") + "</div>";
+  const milestones = Object.entries(milestoneNames);
+  $("milestones").innerHTML = milestoneGroup("기록 점검", "check", milestones.filter(([date]) => date !== race))
+    + milestoneGroup("대회", "race", milestones.filter(([date]) => date === race));
+}
+function choiceControl(date, showDate) {
+  const choice = choices.get(date);
+  const selected = state.selections[date] || 0;
+  return '<label>' + (showDate ? shortDate(date) + " · " : "") + escape(choice.label)
+    + '<select class="week-select" data-choice="' + date + '">'
+    + choice.options.map((option, i) => '<option value="' + i + '"' + (i === selected ? " selected" : "")
+      + ">" + escape(option.label) + "</option>").join("") + "</select></label>";
+}
+$("weekPicker").innerHTML = WEEKS.map(week => '<option value="' + week.w + '">' + week.w + " · " + week.ph
+  + " (" + shortDate(week.s) + "–" + shortDate(week.days[6].date) + ")</option>").join("");
+$("weekPicker").value = currentWeek;
+function renderWeekChoices() {
+  const week = weeks.get($("weekPicker").value);
+  const controls = week.days.filter(day => choices.has(day.date)).map(day => choiceControl(day.date, true));
+  $("weekChoices").innerHTML = '<p class="detail-copy">' + escape(week.note) + '</p><div class="choice-list">'
+    + (controls.length ? controls.join("") : '<p class="muted">이 주는 달력에서 날짜별 안내를 확인하세요.</p>') + "</div>";
+}
+function render() {
+  renderOverview();
+  renderCalendar();
+  renderTables();
+  renderWeekChoices();
+}
+function showWeek(id) {
+  $("weekPicker").value = id;
+  $("weekOptions").open = true;
+  renderWeekChoices();
+  $("weekPicker").focus();
+}
+
+function renderDay() {
+  const day = dates.get(activeDate);
+  const plan = selectedDay(day);
+  const week = weeks.get(day.week);
+  $("dayDate").textContent = longDate(day.date) + " · " + week.w + " " + week.ph;
+  $("dayHeading").textContent = plan.title;
+  $("dayPlan").innerHTML = '<div class="metrics">' + badge(plan) + "<b>" + dayKm(plan.km) + "</b>"
+    + (day.optional ? "<span>선택 러닝</span>" : "") + "</div>"
+    + (plan.adjusted ? '<p class="plan-changed detail-copy">원본 ' + escape(day.title) + " · " + dayKm(day.km) + "</p>" : "")
+    + '<p class="detail-copy">' + escape(plan.detail || "추가 안내가 없습니다.") + "</p>"
+    + '<p class="muted">' + escape(week.note) + "</p>";
+  $("dayChoices").innerHTML = (choiceDatesByDay.get(day.date) || []).map(date => choiceControl(date, date !== day.date)).join("");
+  syncLogFields();
+}
+function syncLogFields() {
+  const done = $("logStatus").value === "done";
+  $("distanceField").hidden = !done || dates.get(activeDate).km === 0;
+  $("logDistance").disabled = $("distanceField").hidden;
+  $("timeField").hidden = !done || !Object.hasOwn(milestoneNames, activeDate) || selectedDay(dates.get(activeDate)).type === "X";
+  $("logTime").disabled = $("timeField").hidden;
+  $("timeHint").hidden = $("timeField").hidden;
+  $("timeNotice").hidden = !done || !$("timeField").hidden;
+}
+function openDay(date, trigger) {
+  activeDate = date;
+  opener = trigger;
+  const log = state.logs[date];
+  $("logStatus").value = log?.status || "";
+  $("logDistance").value = log?.km ?? "";
+  $("logTime").value = log?.time || "";
+  $("logNote").value = log?.note || "";
+  $("logError").hidden = true;
+  renderDay();
+  $("dayDialog").showModal();
+}
+
+document.addEventListener("click", event => {
+  const button = event.target.closest("button");
+  if (!button) return;
+  if (button.dataset.day) openDay(button.dataset.day, button);
+  if (button.dataset.month) {
+    activeMonth = button.dataset.month;
+    renderCalendar();
+    $("months").querySelector('[data-month="' + activeMonth + '"]').focus();
+  }
+  if (button.dataset.week) showWeek(button.dataset.week);
+  if (button.id === "currentOptions") showWeek(currentWeek);
+  if (button.hasAttribute("data-close")) button.closest("dialog").close();
+});
+$("dayDialog").addEventListener("close", () => {
+  if (opener?.isConnected) opener.focus();
+  else {
+    const selector = 'button[data-day="' + activeDate + '"]';
+    ($("calendar").querySelector(selector) ?? document.querySelector(selector))?.focus();
+  }
+  activeDate = null;
+  opener = null;
+});
+$("weekPicker").addEventListener("change", renderWeekChoices);
+$("logStatus").addEventListener("change", syncLogFields);
+document.addEventListener("change", event => {
+  const select = event.target.closest("select[data-choice]");
+  if (!select) return;
+  const date = select.dataset.choice;
+  const index = Number(select.value);
+  const selections = {...state.selections};
+  if (index === 0) delete selections[date];
+  else selections[date] = index;
+  save({...state, selections}, "훈련 선택을 반영했습니다.");
+  renderOverview();
+  renderCalendar();
+  renderTables();
+  const container = $("dayDialog").open ? $("dayChoices") : $("weekChoices");
+  if ($("dayDialog").open) renderDay();
+  else renderWeekChoices();
+  container.querySelector('[data-choice="' + date + '"]')?.focus();
+});
+$("logForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const status = $("logStatus").value;
+  const km = $("logDistance").disabled || $("logDistance").value === "" ? null : $("logDistance").valueAsNumber;
+  const time = $("logTime").disabled ? "" : $("logTime").value.trim();
+  const note = $("logNote").value.trim();
+  if (time && !validTime(time)) {
+    $("logError").textContent = "기록은 분:초 또는 시:분:초 형식으로 입력하세요.";
+    $("logError").hidden = false;
+    $("logTime").focus();
+    return;
+  }
+  const logs = {...state.logs};
+  if (!status && !note) delete logs[activeDate];
+  else logs[activeDate] = {status, km, time, note};
+  save({...state, logs}, "훈련 기록을 저장했습니다.");
+  $("dayDialog").close();
+  render();
+});
+
+let pendingBackup = null;
+function clearRestore(message = "") {
+  pendingBackup = null;
+  $("restore").textContent = "백업 검사";
+  $("backupMessage").textContent = message;
+}
+$("backupOpen").addEventListener("click", () => {
+  $("backupText").value = "";
+  clearRestore();
+  $("backupDialog").showModal();
+});
+$("download").addEventListener("click", () => {
+  const json = JSON.stringify(state, null, 2);
+  $("backupText").value = json;
+  clearRestore("백업을 다운로드했습니다. 필요하면 아래 텍스트를 복사해 보관하세요.");
+  const url = URL.createObjectURL(new Blob([json], {type:"application/json"}));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "2027-donga-training-" + today + ".json";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+$("loadFile").addEventListener("click", () => $("backupFile").click());
+$("backupFile").addEventListener("change", async event => {
+  const file = event.target.files[0];
+  event.target.value = "";
+  if (!file) return;
+  try {
+    if (file.size > 1000000) throw new Error("백업 파일이 너무 큽니다.");
+    $("backupText").value = await file.text();
+    clearRestore("백업 파일을 읽었습니다. 백업 검사를 눌러 확인하세요.");
+  } catch (error) {
+    clearRestore(error.message);
+  }
+});
+$("backupText").addEventListener("input", () => clearRestore());
+$("restore").addEventListener("click", () => {
+  const raw = $("backupText").value.trim();
+  if (pendingBackup?.raw === raw) {
+    save(pendingBackup.data, "백업을 복원했습니다.");
+    clearRestore();
+    $("backupDialog").close();
+    render();
+    return;
+  }
+  try {
+    if (!raw) throw new Error("백업 파일을 열거나 JSON을 붙여넣으세요.");
+    const data = parseBackup(raw);
+    pendingBackup = {raw, data};
+    $("restore").textContent = "현재 기록 대체 후 복원";
+    $("backupMessage").textContent = "훈련 기록 " + Object.keys(data.logs).length + "건, 일정 선택 "
+      + Object.keys(data.selections).length + "건을 확인했습니다. 복원하면 현재 데이터 전체가 대체됩니다.";
+  } catch (error) {
+    clearRestore(error instanceof SyntaxError ? "백업 형식이 올바르지 않아요. 처음부터 다시 복사해서 붙여넣어 주세요." : error.message);
+  }
+});
+
+render();
+
+</script>
+</body>
+</html>
