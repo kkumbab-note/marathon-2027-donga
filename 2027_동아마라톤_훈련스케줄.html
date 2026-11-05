@@ -249,6 +249,12 @@ legend{font-weight:800;font-size:.88rem}
 .field input,.field select,.field textarea,dialog textarea{width:100%;border:1px solid #aebfb6;border-radius:7px;background:white;padding:.43rem .5rem}
 .field textarea,dialog textarea{resize:vertical}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.help-links{display:flex;flex-wrap:wrap;gap:7px;margin:.75rem 0}
+.help-links button{font-size:.82rem;color:#9b2024;border-color:#e2bfc0;background:#fff8f8}
+.exercise-intro{font-size:.92rem;line-height:1.7;margin:.6rem 0}
+.exercise-list{padding-left:1.25rem;display:grid;gap:.7rem;margin:.8rem 0}
+.exercise-list li{font-size:.9rem;line-height:1.6}
+.exercise-note{background:#f6f7fa;border-radius:10px;padding:.75rem;font-size:.85rem;line-height:1.6}
 .error{color:#9d2929;font-size:.82rem;margin:.45rem 0}
 footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
 [hidden]{display:none!important}
@@ -540,6 +546,12 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
   </form>
 </dialog>
 
+<dialog id="exerciseDialog" aria-labelledby="exerciseHeading">
+  <div class="row"><p class="overline">훈련 설명</p><button type="button" data-close autofocus>훈련으로 돌아가기</button></div>
+  <h2 id="exerciseHeading"></h2>
+  <div id="exerciseContent"></div>
+</dialog>
+
 <dialog id="backupDialog" aria-labelledby="backupTitle">
   <div class="row"><h2 id="backupTitle">기록 백업 · 복원</h2><button type="button" data-close autofocus>닫기</button></div>
   <p class="detail-copy">다운로드한 JSON 파일을 보관하세요. 복원하면 현재 일정 선택과 기록 전체를 백업 내용으로 대체합니다.</p>
@@ -801,6 +813,7 @@ function dayButton(date, label, primary = false) {
 let activeMonth = focusDate.slice(0, 7);
 let activeDate = null;
 let opener = null;
+let exerciseOpener = null;
 function renderOverview() {
   const diff = (Date.parse(race) - Date.parse(today)) / 86400000;
   $("dday").textContent = diff > 0 ? "D-" + diff : diff === 0 ? "D-day" : "D+" + Math.abs(diff);
@@ -919,6 +932,85 @@ function showWeek(id) {
   $("weekPicker").focus();
 }
 
+const exerciseGuides = {
+  mobility: {
+    title:"가동성 · 회복 운동",
+    content:'<p class="exercise-intro">굳기 쉬운 관절을 편한 범위에서 움직이고 몸을 가볍게 푸는 선택 운동입니다. 해당 날짜에 적힌 10~15분을 참고해 필요한 동작을 골라 합니다.</p>'
+      + '<ol class="exercise-list">'
+      + '<li><b>폼롤러</b> · 허벅지 앞쪽, 엉덩이, 종아리를 천천히 굴려 풀어 줍니다. 폼롤러가 없으면 생략해도 됩니다.</li>'
+      + '<li><b>90/90 고관절 스트레칭</b> · 바닥에 앉아 양 무릎을 앞뒤로 편하게 굽히고 고관절 주변을 부드럽게 늘립니다. 계획의 참고 시간은 좌우 각 60초입니다.</li>'
+      + '<li><b>발목 움직이기</b> · 발바닥을 바닥에 붙인 채 무릎을 발끝 방향으로 천천히 내밀었다가 돌아옵니다. 계획에는 15회씩 2세트가 적혀 있습니다.</li>'
+      + '<li><b>등 회전</b> · 옆으로 누워 무릎을 굽힌 채 위쪽 팔과 가슴을 천천히 반대편으로 엽니다. 계획에는 10회씩 2세트가 적혀 있습니다.</li>'
+      + '<li><b>종아리 스트레칭</b> · 벽을 짚고 한 발을 뒤로 뻗어 뒤꿈치를 바닥에 붙입니다. 계획에는 60초씩 2회가 적혀 있습니다.</li></ol>'
+      + '<p class="exercise-note">모든 동작을 억지로 채우기보다 편한 범위에서 고르세요. 통증이 생기거나 심해지면 해당 동작을 멈춥니다. <a href="https://www.leedsth.nhs.uk/patients/resources/ankle-exercises/" target="_blank" rel="noopener noreferrer">발목 운동 안내 · NHS</a></p>'
+  },
+  strength: {
+    title:"가벼운 하체 보강",
+    content:'<p class="exercise-intro">달리기에 쓰는 다리와 엉덩이 근육을 가볍게 쓰는 선택 운동입니다. 전날 롱런에서 회복됐을 때만 하고, 피로하면 가동성 운동으로 바꾸거나 쉽니다.</p>'
+      + '<ol class="exercise-list">'
+      + '<li><b>스쿼트</b> · 발을 골반 너비 정도로 벌리고 의자에 앉듯 엉덩이를 뒤로 보내며 편한 만큼 내려갔다가 일어납니다.</li>'
+      + '<li><b>스플릿 스쿼트</b> · 한 발을 앞에 두고 양 무릎을 천천히 굽혔다 펴며 좌우를 바꿉니다. 균형이 어렵다면 벽이나 의자를 잡습니다.</li>'
+      + '<li><b>루마니안 데드리프트</b> · 무릎을 살짝 굽힌 채 엉덩이를 뒤로 보내고 상체를 기울였다가 일어납니다.</li>'
+      + '<li><b>스텝업</b> · 안정적인 낮은 계단에 한 발로 올라갔다가 천천히 내려옵니다. 좌우를 바꿉니다.</li>'
+      + '<li><b>카프레이즈</b> · 벽이나 의자를 잡고 발뒤꿈치를 들어 올렸다가 천천히 내립니다.</li></ol>'
+      + '<p class="exercise-note">원본의 A 루틴은 30분 구성입니다. 이 날짜에 15~25분으로 적혀 있다면 가벼운 무게와 적은 세트로 조절하세요. 운동 후 통증이 남거나 피로가 크면 쉽니다. <a href="https://www.worcsacute.nhs.uk/leaflets/lateral-hip-pain-exercises/" target="_blank" rel="noopener noreferrer">하체 운동 동작 참고 · NHS</a></p>'
+  },
+  core: {
+    title:"코어 · 안정성 운동",
+    content:'<p class="exercise-intro">몸통과 골반이 안정적으로 움직이도록 돕는 가벼운 보강입니다. 계획의 시간과 회복 상태를 기준으로 동작을 고릅니다.</p>'
+      + '<ol class="exercise-list"><li><b>플랭크</b> · 팔꿈치와 발끝으로 몸을 지지하고 편안하게 호흡합니다.</li>'
+      + '<li><b>사이드 플랭크</b> · 옆으로 누운 자세에서 팔꿈치로 지지하며 몸통을 들어 올립니다.</li>'
+      + '<li><b>버드독</b> · 네발 자세에서 한쪽 팔과 반대쪽 다리를 천천히 뻗었다 돌아옵니다.</li>'
+      + '<li><b>글루트 브릿지</b> · 무릎을 세우고 누운 뒤 엉덩이를 천천히 올렸다 내립니다.</li>'
+      + '<li><b>클램쉘과 한 발 균형</b> · 옆으로 누워 무릎을 열거나, 지지물을 가까이 두고 한 발로 섭니다.</li></ol>'
+      + '<p class="exercise-note">다음 달리기에 근육통이 남지 않을 정도로 조절합니다. 통증이 생기면 해당 동작을 멈춥니다. <a href="https://www.cuh.nhs.uk/patient-information/hip-strengthening-exercises/" target="_blank" rel="noopener noreferrer">브릿지 동작 참고 · NHS</a></p>'
+  },
+  nsm: {
+    title:"NSM · 서브역치 반복주",
+    content:'<p class="exercise-intro">숨이 차지만 통제할 수 있는 강도로 일정 시간 달리고, 중간에 아주 천천히 조깅하며 회복하는 반복 훈련입니다. 예를 들어 3×5분은 5분 달리기를 세 번 한다는 뜻입니다.</p>'
+      + '<ol class="exercise-list"><li><b>준비</b> · 이지런 2km로 몸을 풉니다.</li><li><b>반복</b> · 그날 계획에 적힌 시간과 횟수로 달리고, 반복 사이에는 안내된 시간만큼 천천히 조깅합니다.</li><li><b>마무리</b> · 이지 조깅으로 마칩니다. 준비·반복·회복·마무리 거리가 그날의 총거리에 포함됩니다.</li></ol>'
+      + '<p class="exercise-note">원본 계획은 체감 강도 RPE 4~5/10과 한 세트 더 할 여유를 기준으로 제시합니다. 심박은 참고값이며, 날씨와 호흡에 따라 속도를 조절합니다. 쿨다운이 부족할 것 같으면 마지막 반복을 줄이거나 생략합니다.</p>'
+  },
+  easy: {
+    title:"이지런 · 회복 조깅",
+    content:'<p class="exercise-intro">문장으로 대화할 수 있을 만큼 편안한 강도로 달리는 훈련입니다. 회복 조깅은 피로가 남지 않도록 특히 가볍게 달립니다.</p>'
+      + '<p class="exercise-note">거리와 페이스는 해당 날짜의 안내를 참고하고, 피로나 통증이 남으면 거리를 줄이거나 쉽니다.</p>'
+  },
+  long: {
+    title:"롱런 · 장거리 달리기",
+    content:'<p class="exercise-intro">이지런보다 긴 거리를 달리며 장시간 움직이는 데 적응하는 훈련입니다. 별도 안내가 없으면 편하게 대화할 수 있는 강도로 달립니다.</p>'
+      + '<p class="exercise-note">해당 날짜의 거리와 조건을 확인하세요. MP 구간이 있는 날은 회복 조건을 확인한 뒤 선택합니다. 2월 28일에는 원본 계획의 27km 또는 2시간 45분 상한 중 먼저 도달할 때 마칩니다.</p>'
+  },
+  mp: {
+    title:"MP · 마라톤 페이스",
+    content:'<p class="exercise-intro">목표 마라톤 페이스를 연습하는 구간입니다. 이 계획의 기본 목표에 대한 참고 페이스는 km당 5분 12초 전후입니다.</p>'
+      + '<p class="exercise-note">그날의 준비·MP·마무리 구간과 회복 조건을 확인하세요. 호흡이나 체감이 지나치게 힘들면 원본 계획에 따라 이지런으로 전환합니다.</p>'
+  },
+  trail: {
+    title:"트레일 이지런",
+    content:'<p class="exercise-intro">흙길이나 완만한 오르막을 편한 대화가 가능한 강도로 달리는 훈련입니다.</p>'
+      + '<p class="exercise-note">원본 계획은 급경사에서는 걷고 내리막은 속도를 낮추도록 안내합니다. 길이 얼었거나 피로하면 평지 이지런으로 바꿉니다.</p>'
+  },
+  race: {
+    title:"기록 점검 · 대회",
+    content:'<p class="exercise-intro">10km와 하프는 현재 기록과 회복 상태를 확인하는 점검입니다. 3월 21일은 목표 풀코스 대회입니다.</p>'
+      + '<p class="exercise-note">각 날짜의 참가 조건과 준비·마무리 안내를 먼저 확인하세요. 목표를 검토할 때는 기록과 함께 후반 페이스, 보급, 회복을 살펴봅니다.</p>'
+  }
+};
+
+function exerciseLinks(plan) {
+  const types = {E:"easy", L:"long", MP:"mp", NSM:"nsm", TR:"trail", R:"race"};
+  const keys = new Set();
+  if (types[plan.type]) keys.add(types[plan.type]);
+  const text = plan.title + " " + plan.detail;
+  if (text.includes("가동성")) keys.add("mobility");
+  if (text.includes("하체")) keys.add("strength");
+  if (text.includes("코어")) keys.add("core");
+  if (text.includes("NSM")) keys.add("nsm");
+  if (text.includes("MP")) keys.add("mp");
+  return [...keys].map(key => '<button type="button" data-exercise="' + key + '">' + escape(exerciseGuides[key].title) + ' 설명 보기</button>').join("");
+}
+
 function renderDay() {
   const day = dates.get(activeDate);
   const plan = selectedDay(day);
@@ -929,7 +1021,8 @@ function renderDay() {
     + (day.optional ? "<span>선택 러닝</span>" : "") + "</div>"
     + (plan.adjusted ? '<p class="plan-changed detail-copy">원본 ' + escape(day.title) + " · " + dayKm(day.km) + "</p>" : "")
     + '<p class="detail-copy">' + escape(plan.detail || "추가 안내가 없습니다.") + "</p>"
-    + '<p class="muted">' + escape(week.note) + "</p>";
+    + '<p class="muted">' + escape(week.note) + "</p>"
+    + '<div class="help-links" aria-label="훈련 설명">' + exerciseLinks(plan) + "</div>";
   $("dayChoices").innerHTML = (choiceDatesByDay.get(day.date) || []).map(date => choiceControl(date, date !== day.date)).join("");
   syncLogFields();
 }
@@ -961,6 +1054,13 @@ document.addEventListener("click", event => {
   const button = event.target.closest("button");
   if (!button) return;
   if (button.dataset.day) openDay(button.dataset.day, button);
+  if (button.dataset.exercise) {
+    const guide = exerciseGuides[button.dataset.exercise];
+    exerciseOpener = button;
+    $("exerciseHeading").textContent = guide.title;
+    $("exerciseContent").innerHTML = guide.content;
+    $("exerciseDialog").showModal();
+  }
   if (button.dataset.month) {
     activeMonth = button.dataset.month;
     renderCalendar();
@@ -969,6 +1069,10 @@ document.addEventListener("click", event => {
   if (button.dataset.week) showWeek(button.dataset.week);
   if (button.id === "currentOptions") showWeek(currentWeek);
   if (button.hasAttribute("data-close")) button.closest("dialog").close();
+});
+$("exerciseDialog").addEventListener("close", () => {
+  if (exerciseOpener?.isConnected) exerciseOpener.focus();
+  exerciseOpener = null;
 });
 $("dayDialog").addEventListener("close", () => {
   if (opener?.isConnected) opener.focus();
