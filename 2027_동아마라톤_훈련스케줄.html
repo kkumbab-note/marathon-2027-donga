@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="runplan-sans.woff2" as="font" type="font/woff2" crossorigin>
 <title>2027 동아마라톤 훈련 스케줄</title>
 <!--
 Copyright (c) 2021, Kil Hyung-jin (https://github.com/orioncactus/pretendard),
@@ -102,9 +103,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 -->
 <style>
-@font-face{font-family:'Pretendard';src:url(pretendard.woff2) format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+/* 글꼴: Pretendard(SIL OFL 1.1)에서 자주 쓰는 한글 2,350자·영문·기호와 굵기 400~930만 남긴 수정본(2MB → 317KB).
+   OFL의 예약 글꼴 이름 조건에 따라 수정본 이름을 RunPlan Sans로 바꿈 */
+@font-face{font-family:'RunPlan Sans';src:url(runplan-sans.woff2) format('woff2');font-style:normal;font-weight:400 930;font-display:swap}
 /* 기본 */
-:root{color-scheme:light;--ink:#18191c;--muted:#5d5e63;--line:#e5e5e5;--surface:#fff;--paper:#f7f7f6;--accent:#b42326;--amber:#754b0e;font:16px/1.55 'Pretendard','Malgun Gothic',sans-serif}
+:root{color-scheme:light;--ink:#18191c;--muted:#5d5e63;--line:#e5e5e5;--surface:#fff;--paper:#f7f7f6;--accent:#b42326;--amber:#754b0e;font:16px/1.55 'RunPlan Sans','Malgun Gothic',sans-serif}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink)}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -134,7 +137,7 @@ h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:800;letter-spacing:-.065em;line
 .hero .sub{color:#a51d20;font-size:.88rem;font-weight:700}
 .goals{display:flex;gap:8px;flex-wrap:wrap}
 .goal{min-width:98px;display:grid;gap:5px;padding:12px 15px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:.73rem;color:var(--muted);white-space:nowrap}
-.goal b{font:800 1.3rem/1.2 'Pretendard','Malgun Gothic',sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.goal b{font:800 1.3rem/1.2 'RunPlan Sans','Malgun Gothic',sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
 .goal:first-child{background:var(--accent);border-color:var(--accent);color:#fff}
 .goal:first-child b{color:#fff;font-weight:900;font-size:1.6rem}
 /* 오늘 · 이번 주 */
