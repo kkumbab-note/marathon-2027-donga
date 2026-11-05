@@ -121,7 +121,10 @@ h3{font-size:1.03rem}
 /* 상단: 완주 이미지를 전체에 깔고 제목 뒤를 부드럽게 처리 */
 .hero{position:relative;overflow:hidden;background:var(--paper);padding:48px 0 54px}
 .hero-art{position:absolute;inset:0;overflow:hidden}
-.hero-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+/* 큰 이미지가 오기 전에 보이는 흐린 미리보기(40px WebP) */
+.hero-art::before{content:"";position:absolute;inset:0;background:url(data:image/webp;base64,UklGRqQBAABXRUJQVlA4IJgBAACQCACdASooABcAPtFapU4oJKMiKqgBABoJbACdM9kqLYAKAEdPuJlQPcsURo/cGacLwbSZvkJxAw/Aq1lla1QwGLkS0o0bgGtyhr61mAD+lcf8bANcQAMulqbEGnZrU1875RDRT5sVXUATIty28m8FbVX4YJOyMF9YWhDQaLm0r8il2ZBVbyrGomXKrdFcyGC7g1NHI1muG7TtcFjZeCmn1AXc84CmzWjtBfbAjfVm8G65TqBDxoLUzroCOH3YJdWu9JvssYQWSKd78qdiXwqu8Eccg3lScOAVfSw2nvq+M5Xs8ew03Qu+5XcdNgdBX8h9ZtXa+oEYk1FJZ4zfhltDR35W/AGAj1OeyE3M+h6KCNR9DqTqwH6u2JmZL9klXp6ivmDKspJ4o6X1N9YmtbV4E8+AyFiv8PeZy0uEmJcd1nQkERe0nR8o4PyPe8Gqbos4RmSXfRkDJfhqkEsy2Z86v+A6/ZlDp0Mrk7TOxEGEQsUbQxHwYfbIypZFQB69Gf1fuwvsRoLc14Tka2jzgV1lcY5qdJWEAAA=) center top/cover no-repeat;filter:blur(12px);transform:scale(1.08)}
+.hero-art picture{display:contents}
+.hero-art img{position:relative;display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
 .hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,250,249,.97) 0%,rgba(250,250,249,.92) 30%,rgba(250,250,249,.46) 54%,rgba(250,250,249,0) 75%);backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);pointer-events:none}
 .hero-inner{position:relative;top:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:260px}
 .hero-inner>div:first-child,.hero-inner>.goals{align-self:start}
@@ -238,6 +241,7 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
   .hero{padding:32px 0 36px}
   /* 폰(상단 높이 328px)에서 기록 시계 전체와 러너가 함께 보이는 가로 위치. 320~430px 폭 모두 충족 */
   .hero-art img{object-position:60% top}
+  .hero-art::before{background-position:60% top}
   .hero-art::after{background:linear-gradient(90deg,rgba(250,250,249,.97),rgba(250,250,249,.7) 38%,rgba(250,250,249,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
 }
 /* 모바일 */
@@ -267,7 +271,10 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
 </head>
 <body>
 <header class="hero">
-  <div class="hero-art"><img src="동아마라톤_330_완주_러너.png" alt="3시간 29분 42초를 기록하며 결승선을 통과하는 러너의 애니메이션풍 그림"></div>
+  <div class="hero-art"><picture>
+    <source type="image/webp" srcset="동아마라톤_330_완주_러너_1280.webp 1280w, 동아마라톤_330_완주_러너_1672.webp 1672w" sizes="(max-width: 583px) 583px, 100vw">
+    <img src="동아마라톤_330_완주_러너.png" width="1672" height="941" fetchpriority="high" alt="3시간 29분 42초를 기록하며 결승선을 통과하는 러너의 애니메이션풍 그림">
+  </picture></div>
   <div class="wrap hero-inner">
     <div>
       <p class="eyebrow">2027 SEOUL MARATHON · 20 WEEK PLAN</p>
