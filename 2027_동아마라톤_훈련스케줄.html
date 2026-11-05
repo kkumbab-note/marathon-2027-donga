@@ -177,9 +177,10 @@ main{padding-bottom:40px}
 .day,.blank{min-width:0;min-height:126px;border:0;border-radius:0}
 .blank{background:#f8f9fa;padding:10px;color:#89919d;font-size:.8rem}
 .day{display:grid;align-content:start;gap:6px;padding:12px;text-align:left;background:#fff;position:relative}
-.day.skipped{background:#f8f8f7}
 .day.skipped>:not(.stamp){opacity:.45}
 .day.today-cell{box-shadow:inset 0 0 0 2px var(--accent);background:#fff6f5}
+.day.done,.day.done.today-cell{background:#ffe8ee}
+.day.skipped,.day.skipped.today-cell{background:#eeeff0}
 .day.race-day{border-bottom:3px solid #c62828}
 .day.race-day .date-num{color:#b51e1e}
 .day .row{gap:3px;flex-wrap:nowrap}
