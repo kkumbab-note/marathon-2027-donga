@@ -236,7 +236,8 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
   .wrap{width:calc(100% - 24px)}
   .overview,.lower{grid-template-columns:minmax(0,1fr)}
   .hero{padding:32px 0 36px}
-  .hero-art img{object-position:left top}
+  /* 폰(상단 높이 328px)에서 기록 시계 전체와 러너가 함께 보이는 가로 위치. 320~430px 폭 모두 충족 */
+  .hero-art img{object-position:60% top}
   .hero-art::after{background:linear-gradient(90deg,rgba(250,250,249,.97),rgba(250,250,249,.7) 38%,rgba(250,250,249,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
 }
 /* 모바일 */
