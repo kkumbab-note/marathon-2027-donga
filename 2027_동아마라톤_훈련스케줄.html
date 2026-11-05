@@ -103,78 +103,97 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 -->
 <style>
 @font-face{font-family:'Pretendard';src:url(pretendard.woff2) format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
-:root{color-scheme:light;--ink:#252b3b;--muted:#5c6677;--line:#e3e5eb;--surface:#fff;--paper:#f4f5f7;--green:#4655ad;--amber:#754b0e;font:16px/1.55 "Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+/* 기본 */
+:root{color-scheme:light;--ink:#18191c;--muted:#5d5e63;--line:#e5e5e5;--surface:#fff;--paper:#f7f7f6;--accent:#b42326;--amber:#754b0e;font:16px/1.55 'Pretendard','Malgun Gothic',sans-serif}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink)}
 button,input,select,textarea{font:inherit;color:inherit}
 button,select,summary{cursor:pointer}
 button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #1475a6;outline-offset:3px}
-button{border:1px solid var(--line);background:white;border-radius:11px;padding:.52rem .75rem;font-weight:700}
-button:hover{border-color:var(--green);background:#f3f3ff}
-button.primary,button[aria-pressed="true"]{background:var(--green);color:white;border-color:var(--green)}
-a{color:var(--green)}
+button{border:1px solid var(--line);background:white;border-radius:10px;padding:.52rem .75rem;font-weight:700}
+button:hover{border-color:var(--accent);background:#fff2f2}
+button.primary,button[aria-pressed="true"]{background:var(--accent);color:white;border-color:var(--accent)}
+a{color:var(--accent)}
 h1,h2,h3,h4,p{margin:0}
 h2{font-size:1.3rem;line-height:1.3}
 h3{font-size:1.03rem}
-.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
-.hero{background:var(--paper);padding:36px 0 30px}
-.hero-inner{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:22px;min-height:260px}
+.wrap{width:min(1280px,calc(100% - 48px));margin:auto}
+/* 상단: 완주 이미지를 전체에 깔고 제목 뒤를 부드럽게 처리 */
+.hero{position:relative;overflow:hidden;background:var(--paper);padding:48px 0 54px}
+.hero-art{position:absolute;inset:0;overflow:hidden}
+.hero-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,250,249,.97) 0%,rgba(250,250,249,.92) 30%,rgba(250,250,249,.46) 54%,rgba(250,250,249,0) 75%);backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);pointer-events:none}
+.hero-inner{position:relative;top:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:260px}
+.hero-inner>div:first-child,.hero-inner>.goals{align-self:start}
 .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.15em}
-.hero .eyebrow{color:var(--green)}
-h1{font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.065em;line-height:1.18;margin:.5rem 0}
+.hero .eyebrow{color:#a51d20}
+h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:800;letter-spacing:-.065em;line-height:1.18;margin:.5rem 0}
 .hero .sub{color:#a51d20;font-size:.88rem;font-weight:700}
 .goals{display:flex;gap:8px;flex-wrap:wrap}
-.goal{min-width:98px;display:grid;gap:5px;padding:12px 15px;border:1px solid var(--line);border-radius:16px;background:#fff;font-size:.73rem;color:var(--muted);white-space:nowrap}
-.goal b{font:800 1.3rem/1.2 system-ui,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
-.goal:first-child{background:#e8eaf9;border-color:#e8eaf9}
-.goal:first-child b{color:#394a9e}
+.goal{min-width:98px;display:grid;gap:5px;padding:12px 15px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:.73rem;color:var(--muted);white-space:nowrap}
+.goal b{font:800 1.3rem/1.2 'Pretendard','Malgun Gothic',sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.goal:first-child{background:var(--accent);border-color:var(--accent);color:#fff}
+.goal:first-child b{color:#fff;font-weight:900;font-size:1.6rem}
+/* 오늘 · 이번 주 */
 main{padding-bottom:40px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 28px rgba(35,43,65,.035)}
-.overview{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
-.today{background:#eeeffb;border-color:#e0e2f5}
-.week{background:#fff}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.035)}
+.overview{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+.today{background:#fff;border-color:var(--line);border-left:5px solid var(--accent);padding:28px}
+.today h2{font-size:1.7rem;letter-spacing:-.04em}
+.today .metrics b{font-size:1.2rem}
+.today .detail-copy{font-size:1rem}
+.week{background:#fff;padding:28px}
 .overline,.muted,.lede{color:var(--muted);font-size:.84rem}
 .overline{font-weight:800;margin-bottom:5px}
 .row{display:flex;justify-content:space-between;align-items:center;gap:.65rem;flex-wrap:wrap}
 .detail-copy{margin:.55rem 0;color:var(--muted);font-size:.9rem;overflow-wrap:anywhere}
 .metrics{display:flex;flex-wrap:wrap;gap:.45rem 1.2rem;margin:.62rem 0;font-size:.82rem;color:var(--muted)}
 .metrics b{color:var(--ink);font-size:1rem;font-variant-numeric:tabular-nums}
-.statusline{min-height:1.5rem;margin:5px 0;color:var(--green);font-size:.82rem}
+.statusline{min-height:1.5rem;margin:5px 0;color:var(--accent);font-size:.82rem}
+/* 월간 달력 */
 .calendar-card{padding:0;overflow:hidden}
-.calendar-header{padding:22px 24px 18px;display:grid;gap:14px}
+.calendar-header{padding:26px 28px 20px;display:grid;gap:14px}
+#calendarHeading{font-size:1.55rem;letter-spacing:-.04em}
 .controls{display:flex;gap:5px;flex-wrap:wrap}
 .controls button{font-size:.83rem;padding:.45rem .78rem;border-radius:99px}
 .legend{display:flex;gap:.42rem .7rem;flex-wrap:wrap;color:var(--muted);font-size:.72rem}
 .badge{display:inline-block;border-radius:5px;padding:.09rem .34rem;font-size:.69rem;font-weight:800;background:#eaf0ec;color:#36564b;white-space:nowrap}
-.b-NSM{color:#6d366e;background:#f2e2f3}.b-E{color:#0b6048;background:#def2e6}
-.b-L{color:#1b4a7b;background:#e1edf9}.b-MP{color:#82421e;background:#fae7d9}
-.b-check,.b-race{color:#fff;background:#c62828}
-.b-TR{color:#575917;background:#f1f0d6}.b-S{color:#4f4277;background:#ece7f5}
+.b-E{color:#0b6048;background:#def2e6}
+.b-NSM{color:#6d366e;background:#f2e2f3}
+.b-L{color:#1b4a7b;background:#e1edf9}
+.b-MP{color:#82421e;background:#fae7d9}
+.b-TR{color:#575917;background:#f1f0d6}
+.b-S{color:#4f4277;background:#ece7f5}
+.b-X{color:#51545b;background:#ededed}
+.b-check,.b-race{color:#fff;background:var(--accent)}
 .calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
-.weekday{background:#f7f8fb;text-align:center;font-weight:800;padding:10px 7px;font-size:.8rem;color:var(--muted)}
-.day,.blank{min-width:0;min-height:109px;border:0;border-radius:0}
+.weekday{background:#f6f6f5;text-align:center;font-weight:800;padding:12px 7px;font-size:.88rem;color:#343539}
+.day,.blank{min-width:0;min-height:126px;border:0;border-radius:0}
 .blank{background:#f8f9fa;padding:10px;color:#89919d;font-size:.8rem}
-.day{display:grid;align-content:start;gap:5px;padding:10px;text-align:left;background:#fff;position:relative}
-.day.today-cell{box-shadow:inset 0 0 0 2px var(--green);background:#f6f6ff}
+.day{display:grid;align-content:start;gap:6px;padding:12px;text-align:left;background:#fff;position:relative}
 .day.done{background:#e8f6ec}
 .day.skipped{background:#f4f2ee}
+.day.today-cell{box-shadow:inset 0 0 0 2px var(--accent);background:#fff6f5}
+.day.done.today-cell{background:#e8f6ec}
 .day.race-day{border-bottom:3px solid #c62828}
 .day.race-day .date-num{color:#b51e1e}
 .day .row{gap:3px;flex-wrap:nowrap}
-.day .date-num{font-size:.89rem}
-.day .day-title{font-size:.77rem;line-height:1.35;overflow-wrap:anywhere}
-.day .distance,.day .flag{font-size:.69rem;color:var(--muted);line-height:1.3}
-.day .flag{color:var(--green);font-weight:800}
+.day .date-num{font-size:1rem}
+.day .day-title{font-size:.87rem;line-height:1.35;overflow-wrap:anywhere}
+.day .distance,.day .flag{font-size:.76rem;color:var(--muted);line-height:1.3}
+.day .flag{color:var(--accent);font-weight:800}
 .day .distance .small{display:none}
+/* 표 · 옵션 · 점검 */
 .lower{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
-.stack{display:grid;gap:14px}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
 .tbox{overflow-x:auto;margin:.55rem 0}
 table{width:100%;border-collapse:collapse;text-align:left;font-size:.81rem}
 th,td{padding:.53rem .45rem;border-bottom:1px solid var(--line);vertical-align:top}
-thead th{background:#f6f7fa;color:var(--muted)}
+thead th{background:#f6f6f5;color:var(--muted)}
 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 #weekly thead th:not(:first-child),[aria-labelledby="monthlyHeading"] thead th:not(:first-child){text-align:right;white-space:nowrap}
-tr.current td,tr.current th{background:#f0f1fb}
+tr.current td,tr.current th{background:#fff4f3}
+tr.hi td{background:#fff4f3}
 .week-select{display:block;min-height:36px;width:100%;max-width:470px;margin:.42rem 0;padding:.3rem .38rem;border:1px solid #aebfb6;border-radius:7px;background:white;font-size:.86rem}
 .choice-list{display:grid;gap:8px}
 .choice-list h3{font-size:.9rem}
@@ -188,6 +207,7 @@ tr.current td,tr.current th{background:#f0f1fb}
 .milestone-group{margin-top:1rem}
 .milestone-group h3{display:flex;align-items:center;gap:.45rem}
 .milestone-group.check .milestone button,.milestone-group.race .milestone button{color:#b51e1e;border-color:#c62828}
+/* 원본 훈련 가이드 */
 .guide{margin-top:14px}
 .guide summary{font-size:1.12rem;font-weight:800}
 .guide section{padding:14px 0;border-top:1px solid var(--line);margin-top:12px}
@@ -197,6 +217,7 @@ tr.current td,tr.current th{background:#f0f1fb}
 .guide .cards>*{border:1px solid var(--line);padding:12px;border-radius:8px;margin-top:.5rem}
 .guide li,.guide p{font-size:.86rem}
 .guide ul,.guide ol{padding-left:1.15rem}
+/* 대화상자 · 입력 */
 dialog{width:min(565px,calc(100% - 24px));max-height:90dvh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:22px;color:var(--ink);box-shadow:0 22px 70px rgba(23,28,49,.2)}
 dialog::backdrop{background:#22283f99}
 dialog h2{margin:.35rem 0}
@@ -210,116 +231,36 @@ legend{font-weight:800;font-size:.88rem}
 .error{color:#9d2929;font-size:.82rem;margin:.45rem 0}
 footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
 [hidden]{display:none!important}
+/* 태블릿 이하 */
 @media(max-width:1024px){
-  .hero-inner{align-items:flex-start;flex-direction:column;gap:13px}
-  .overview,.lower{grid-template-columns:1fr}
   .wrap{width:calc(100% - 24px)}
-  .hero{position:relative;padding:32px 0 36px;background-position:68% center}
-  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(249,250,252,.7),rgba(249,250,252,.42) 57%,transparent);pointer-events:none}
-  .hero-inner{position:relative}
+  .overview,.lower{grid-template-columns:minmax(0,1fr)}
+  .hero{padding:32px 0 36px}
+  .hero-art img{object-position:left top}
+  .hero-art::after{background:linear-gradient(90deg,rgba(250,250,249,.97),rgba(250,250,249,.7) 38%,rgba(250,250,249,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
 }
+/* 모바일 */
 @media(max-width:550px){
   .card{padding:14px}
   .calendar-card{padding:0}
-  .calendar-header{padding:12px}
-  .goals{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-  .goal{min-width:0;padding:10px}
-  .goal b{font-size:1.1rem}
-  .day,.blank{min-height:69px}
-  .day{padding:4px;justify-items:start;gap:2px}
-  .day .row{flex-direction:column;align-items:flex-start}
-  .day .day-title,.day .distance .full,.day .flag{display:none}
-  .day .distance .small{display:inline}
-  .day .badge{font-size:.58rem;padding:.05rem .22rem}
-  .day .distance{font-size:.58rem}
-  .day.done .date-num::after{content:" ✓";color:var(--green)}
-  .day.skipped .date-num::after{content:" –";color:var(--amber)}
-  .weekday{padding:5px 0}
-}
-/* 러닝 앱 스타일 */
-:root{--ink:#18191c;--muted:#5d5e63;--line:#e5e5e5;--surface:#fff;--paper:#f7f7f6;--green:#b42326}
-button{border-radius:10px}
-button:hover{background:#fff2f2;border-color:#b42326}
-button.primary,button[aria-pressed="true"]{background:#b42326;border-color:#b42326;color:#fff}
-.wrap{width:min(1280px,calc(100% - 48px))}
-.hero .eyebrow{color:#a51d20}
-.goal:first-child{background:#b42326;border-color:#b42326;color:#fff}
-.goal:first-child b{color:#fff}
-.goal{border-radius:12px}
-.card{border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.035)}
-.overview{grid-template-columns:1.4fr 1fr}
-.today{background:#fff;border-color:#e5e5e5;border-left:5px solid #b42326;padding:28px}
-.today h2{font-size:1.7rem;letter-spacing:-.04em}
-.today .metrics b{font-size:1.2rem}
-.today .detail-copy{font-size:1rem}
-.week{padding:28px}
-.calendar-header{padding:26px 28px 20px}
-#calendarHeading{font-size:1.55rem;letter-spacing:-.04em}
-.calendar{background:#e5e5e5}
-.weekday{background:#f6f6f5;color:#343539;font-size:.88rem;padding:12px 7px}
-.day,.blank{min-height:126px}
-.day{padding:12px;gap:6px}
-.day .date-num{font-size:1rem}
-.day .day-title{font-size:.87rem}
-.day .distance,.day .flag{font-size:.76rem}
-.day.today-cell{box-shadow:inset 0 0 0 2px #b42326;background:#fff6f5}
-.day.done.today-cell{background:#e8f6ec}
-.b-E{color:#0b6048;background:#def2e6}
-.b-NSM{color:#6d366e;background:#f2e2f3}
-.b-L{color:#1b4a7b;background:#e1edf9}
-.b-MP{color:#82421e;background:#fae7d9}
-.b-TR{color:#575917;background:#f1f0d6}
-.b-S{color:#4f4277;background:#ece7f5}
-.b-X{color:#51545b;background:#ededed}
-.b-check,.b-race{background:#b42326;color:#fff}
-thead th{background:#f6f6f5}
-tr.current td,tr.current th{background:#fff4f3}
-@media(max-width:1024px){
-  .wrap{width:calc(100% - 24px)}
-  .overview{grid-template-columns:1fr}
-}
-@media(max-width:550px){
   .today,.week{padding:20px}
   .today h2{font-size:1.4rem}
   .calendar-header{padding:18px 14px 14px}
   #calendarHeading{font-size:1.3rem}
+  .goals{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .goal{min-width:0;padding:10px}
+  .goal b{font-size:1.1rem}
+  .goal:first-child b{font-size:1.35rem}
   .day,.blank{min-height:80px}
-  .day{padding:5px 4px;gap:3px}
+  .day{padding:5px 4px;justify-items:start;gap:3px}
+  .day .row{flex-direction:column;align-items:flex-start}
+  .day .day-title,.day .distance .full,.day .flag{display:none}
+  .day .distance .small{display:inline}
   .day .date-num{font-size:.87rem}
   .day .distance{font-size:.65rem}
-  .day .badge{font-size:.62rem}
-}
-
-/* 완주 장면을 전체 비율로 보여주는 상단 배치 */
-.hero-inner{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-rows:auto auto;gap:18px 30px;min-height:0;align-items:center}
-.hero-inner>div:first-child{grid-column:1;grid-row:1;align-self:end}
-.hero-inner>.goals{grid-column:1;grid-row:2;align-self:start}
-.hero-art{grid-column:2;grid-row:1 / span 2;min-width:0;overflow:hidden;border-radius:16px;box-shadow:0 12px 30px rgba(24,25,28,.12)}
-.hero-art img{display:block;width:100%;height:auto}
-@media(max-width:1024px){
-  .hero::before{display:none}
-  .hero-inner{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:14px}
-  .hero-inner>div:first-child,.hero-inner>.goals,.hero-art{grid-column:1;grid-row:auto}
-}
-
-/* 본문과 주요 기록에 Pretendard 적용 */
-:root{font-family:'Pretendard','Malgun Gothic',sans-serif}
-h1{font-weight:800}
-.goal b{font-family:'Pretendard','Malgun Gothic',sans-serif}
-.goal:first-child b{font-weight:900;font-size:1.6rem}
-@media(max-width:550px){.goal:first-child b{font-size:1.35rem}}
-
-/* 상단 전체에 완주 이미지를 배치하고 제목 뒤를 부드럽게 처리 */
-.hero{position:relative;overflow:hidden;background:#f7f7f6;padding:48px 0 54px}
-.hero-art{position:absolute;inset:0;overflow:hidden;border-radius:0;box-shadow:none}
-.hero-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
-.hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,250,249,.97) 0%,rgba(250,250,249,.92) 30%,rgba(250,250,249,.46) 54%,rgba(250,250,249,0) 75%);backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);pointer-events:none}
-.hero-inner{position:relative;top:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:260px}
-.hero-inner>div:first-child,.hero-inner>.goals{align-self:start}
-@media(max-width:1024px){
-  .hero{padding:32px 0 36px}
-  .hero-art img{object-position:left top}
-  .hero-art::after{background:linear-gradient(90deg,rgba(250,250,249,.97),rgba(250,250,249,.7) 38%,rgba(250,250,249,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
+  .day .badge{font-size:.62rem;padding:.05rem .22rem}
+  .day.done .date-num::after{content:" ✓";color:var(--accent)}
+  .day.skipped .date-num::after{content:" –";color:var(--amber)}
 }
 </style>
 </head>
@@ -374,7 +315,7 @@ h1{font-weight:800}
     <div class="stack">
       <section class="card" id="weekly" aria-labelledby="weeklyHeading">
         <div class="row"><h2 id="weeklyHeading">20주 거리와 진행률</h2><span id="progress" class="muted"></span></div>
-        <p class="detail-copy">실행률은 완료한 기본 러닝 횟수를 계획된 기본 러닝 횟수로 나눈 값입니다. 오늘까지의 실행률에는 오늘을 포함하며, 미기록과 건너뜀은 완료에 포함하지 않습니다. 선택 훈련·휴식·보강은 제외합니다. 거리 단위는 km이며 하프와 풀코스를 포함합니다. 실적은 직접 입력한 거리만 합산합니다.</p>
+        <p class="detail-copy">실행률은 완료한 기본 러닝 횟수를 계획된 기본 러닝 횟수로 나눈 값입니다. 오늘까지의 실행률에는 오늘을 포함하며, 미기록과 건너뜀은 완료에 포함하지 않습니다. 선택 훈련·휴식·보강과 일정 선택에서 휴식으로 바꾼 날은 제외합니다. 거리 단위는 km이며 하프와 풀코스를 포함합니다. 실적은 직접 입력한 거리만 합산합니다.</p>
         <details id="weekOptions">
           <summary>주차별 훈련 옵션</summary>
           <label class="field" for="weekPicker">주차</label>
@@ -455,7 +396,7 @@ h1{font-weight:800}
 <tr><td>11/02–11/29</td><td>R1–R4</td><td>회복</td><td>7~37km</td><td>14km</td><td>JTBC 회복 · 이지런 복귀</td></tr>
 <tr><td>11/30–12/27</td><td>W1–W4</td><td>베이스</td><td>41~52km</td><td>20km</td><td>주 1회 NSM · 둘째 주부터 수요일 선택</td></tr>
 <tr><td>12/28–01/31</td><td>W5–W9</td><td>강화</td><td>37~56km</td><td>24km</td><td>NSM 1회 기본(조건부 2회) · 주중 볼륨 분산 · 10km 점검</td></tr>
-<tr><td>02/01–02/28</td><td>W10–W13</td><td>특이성</td><td>39.0975~59km</td><td>27km</td><td>하프와 회복 · MP 5km 후 회복에 따라 9km 선택 · 피크 59km 상한</td></tr>
+<tr><td>02/01–02/28</td><td>W10–W13</td><td>특이성</td><td>39.1~59km</td><td>27km</td><td>하프와 회복 · MP 5km 후 회복에 따라 9km 선택 · 피크 59km 상한</td></tr>
 <tr><td>03/01–03/21</td><td>W14–W16</td><td>테이퍼</td><td>12~42km</td><td>17km</td><td>W14 주 5회 → W15–W16 주 4회 감량 · 풀코스</td></tr>
 </tbody></table></div><p class="lede">¹ 요약은 일자별 표기 거리 기준입니다. 선택 조깅·리허설을 줄이면 실제 거리가 줄어듭니다. 하프는 21.0975km로 합산합니다. 3월 범위는 풀코스 당일 거리를 뺀 훈련 거리입니다. W16 카드에는 풀코스 포함 합계도 표시합니다. 월 경계의 거리 합계는 각 훈련 날짜의 월에 반영합니다.</p>
 </section>
@@ -533,7 +474,7 @@ h1{font-weight:800}
 <div class="rule"><b>초반 페이스</b> 풀코스 목표의 정확한 평균은 3:40 기준 약 5:12.8/km, 3:30 기준 약 4:58.6/km입니다. 첫 10km는 체감과 호흡을 기준으로 억제합니다. 바람·경사·혼잡으로 밀린 시간은 한 번에 만회하지 않습니다.</div>
 </section>
   </details>
-  <footer>훈련 원본 · 2027_20_nsm.html / 20주 NSM 코치 조정판</footer>
+  <footer>훈련 원본 · 20주 NSM 코치 조정판</footer>
 </main>
 
 <dialog id="dayDialog" aria-labelledby="dayHeading">
@@ -581,29 +522,30 @@ h1{font-weight:800}
   <button type="button" id="restore">백업 검사</button>
 </dialog>
 <script>
+"use strict";
+
 const WEEKS=[
 {"w":"R1","m":"11월","ph":"회복","s":"2026-11-02","note":"풀 완주 직후. 걷기·계단이 편해진 뒤에만 주말 조깅을 하나씩 시도합니다.","d":[["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["X",0,"휴식","보강 없음"],["E",3,"회복 조깅","선택 · 20~25분 이내 · 평지, 아주 편하게"],["E",4,"회복 조깅","선택 · 토요일 저녁과 일요일 아침에 통증·피로가 늘지 않았을 때만"]]},
 {"w":"R2","m":"11월","ph":"회복","s":"2026-11-09","note":"회복을 우선하며 몸 상태에 따라 토요일 이지런은 생략해도 됩니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",5,"이지런","6:50~7:20/km 참고 · 평지"],["S",0,"선택 · 코어 또는 가동성","10~20분 · 달리기 없음"],["E",6,"이지런","편하게 대화할 수 있는 강도로 6km를 달립니다. 페이스는 6:45~7:15/km를 참고하세요."],["X",0,"휴식","편하게 쉬면서 컨디션을 회복합니다."],["E",5,"이지런","선택 · 피로하거나 잠이 부족하면 쉬어도 됩니다."],["E",7,"이지런","6:40~7:10/km 참고 · 전 구간 편하게"]]},
 {"w":"R3","m":"11월","ph":"회복","s":"2026-11-16","note":"이지런 뒤 다음 날까지 편안하면 가벼운 근력 운동을 다시 시작합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["E",7,"이지런","6:40~7:00/km 참고"],["S",0,"선택 · 코어 또는 가동성","10~20분 · 달리기 없음"],["E",8,"이지런","6:35~7:00/km 참고"],["X",0,"휴식",""],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",10,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"R4","m":"11월","ph":"회복","s":"2026-11-23","note":"11월은 회복과 거리 적응에 집중합니다. 일요일도 편안한 호흡을 유지합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["S",0,"선택 · 코어 또는 가동성","10~20분 · 달리기 없음"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",14,"롱런","6:20~6:50/km · 피로가 남으면 10~12km"]]},
 {"w":"W1","m":"12월","ph":"베이스","s":"2026-11-30","note":"첫 NSM 적응 주. 이번 주는 주 4회 41km로 시작하고 수요일은 쉽니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",8,"NSM 3×5분","5:15~5:25/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["X",0,"휴식","첫 NSM 다음 날. 편하면 가볍게 걷거나 가동성 운동"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",16,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
-{"w":"W2","m":"12월","ph":"베이스","s":"2026-12-07","note":"W1을 소화한 뒤 다리와 수면 상태가 평소 수준이면 수요일 이지런을 20~30분 도입합니다. 목요일은 5km로 줄여 수·목 합계가 기존 목요일 9km를 넘지 않게 합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",9,"NSM 3×6분","5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",4,"수요일 첫 이지런 · 선택","20~30분, 최대 4km. 문장으로 대화 가능한 강도 · 화요일 NSM 피로가 남으면 휴식"],["E",5,"이지런 · 거리 재배분","6:20~6:50/km 참고 · 수요일에 쉬었어도 목요일은 5km로 마무리"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",18,"롱런","전 구간 이지 · 젤과 급수 타이밍 연습"]],"options":[["수요일 생략",[[2,0]]]]},
+{"w":"W2","m":"12월","ph":"베이스","s":"2026-12-07","note":"W1을 소화한 뒤 다리와 수면 상태가 평소 수준이면 수요일 이지런을 20~30분 도입합니다. 목요일은 5km로 줄여 수·목 합계가 기존 목요일 9km를 넘지 않게 합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",9,"NSM 3×6분","5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",4,"수요일 첫 이지런 · 선택","20~30분, 최대 4km. 문장으로 대화 가능한 강도 · 화요일 NSM 피로가 남으면 휴식"],["E",5,"이지런 · 거리 재배분","6:20~6:50/km 참고 · 수요일에 쉬었어도 목요일은 5km로 마무리"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",18,"롱런","전 구간 이지 · 젤과 급수 타이밍 연습"]]},
 {"w":"W3","m":"12월","ph":"베이스","s":"2026-12-14","note":"20km 롱런 진입 주. 지난주 수요일 조깅을 편하게 소화하고 다음 날까지 회복이 양호했다면 수요일을 최대 5km로 늘립니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 4×6분","5:10~5:20/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",5,"회복 조깅 · 선택","지난주 20~30분이 편했을 때만 최대 5km. 주 5회 첫 시도라면 20~30분, 최대 4km. 피로하면 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",20,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"W4","m":"12월","ph":"베이스","s":"2026-12-21","note":"연말 감량 주. 수요일 회복 조깅도 4km로 줄이고 연말 일정에 맞춰 유연하게 쉽니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["NSM",8,"NSM 3×5분","5:15~5:25/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",4,"회복 조깅 · 선택","6:45~7:15/km · 30분 이내 가볍게 · 연말 일정이나 피로 시 0km 휴식"],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",16,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"W5","m":"1월","ph":"강화","s":"2026-12-28","note":"연말과 1월에 걸친 강화 첫 주. 12/29 NSM 3×8분 뒤 수요일 회복 조깅으로 이어갑니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×8분","5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",5,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["TR",8,"이지 트레일","대화 가능한 강도 · 급경사는 걷기 · 결빙 시 로드 이지런"],["L",20,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
-{"w":"W6","m":"1월","ph":"강화","s":"2027-01-04","note":"화요일 NSM 1회가 기본입니다. 목요일 2회차는 1/7 조건을 모두 충족할 때만 선택합니다. 수요일은 쉬고, 2회차를 선택하면 일요일은 20km 이지로 줄입니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×9분","5:10~5:20/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["X",0,"휴식","화요일 NSM 후 회복. 가벼운 가동성 운동은 가능"],["E",9,"이지런 · 조건부 NSM으로 대체 가능","기본 이지 9km. 직전 2주 NSM에 여유가 있었고 화요일 이후 이틀간 수면·다리가 평소 수준일 때만 NSM 3×4분. 5:12~5:22/km, 반복 후반 155~165bpm 참고, 사이 90초 조깅. 이지 2km로 시작하고 쿨다운 포함 총 9km."],["X",0,"휴식",""],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",22,"이지 롱런","목요일이 이지였다면 22km. 목요일에 NSM을 했다면 20km. 전 구간 대화 가능한 강도"]],"options":[["목요일 NSM + 일요일 20km",[[6,20]]]]},
+{"w":"W6","m":"1월","ph":"강화","s":"2027-01-04","note":"화요일 NSM 1회가 기본입니다. 목요일 2회차는 1/7 조건을 모두 충족할 때만 선택합니다. 수요일은 쉬고, 2회차를 선택하면 일요일은 20km 이지로 줄입니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×9분","5:10~5:20/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["X",0,"휴식","화요일 NSM 후 회복. 가벼운 가동성 운동은 가능"],["E",9,"이지런 · 조건부 NSM으로 대체 가능","기본 이지 9km. 직전 2주 NSM에 여유가 있었고 화요일 이후 이틀간 수면·다리가 평소 수준일 때만 NSM 3×4분. 5:12~5:22/km, 반복 후반 155~165bpm 참고, 사이 90초 조깅. 이지 2km로 시작하고 쿨다운 포함 총 9km."],["X",0,"휴식",""],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",22,"이지 롱런","목요일이 이지였다면 22km. 목요일에 NSM을 했다면 20km. 전 구간 대화 가능한 강도"]]},
 {"w":"W7","m":"1월","ph":"강화","s":"2027-01-11","note":"수요일 6km 회복 조깅으로 목요일을 10km로 낮추면서 주간 56km(롱런 비중 43%)를 달성합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 5×5분","5:08~5:18/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",6,"이지런","6:35~7:00/km · 일요일 대비"],["L",24,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"W8","m":"1월","ph":"강화","s":"2027-01-18","note":"1/23 10km 점검이 이번 주 유일한 강한 세션입니다. 주중은 짧은 이지와 회복 조깅으로 다리를 아낍니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["E",4,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 가볍게 · 피로 시 0km 휴식"],["E",6,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식","테스트 전날. 완전 휴식"],["R",14,"10km 기록 점검","워밍업 3km + 10km 기록 측정 + 쿨다운 1km"],["E",6,"회복 조깅","6:45~7:15/km · 전날 여파가 있으면 산책 또는 휴식"]]},
 {"w":"W9","m":"1월","ph":"강화","s":"2027-01-25","note":"하프를 앞둔 마지막 NSM. 수요일 6km 회복 조깅으로 목·토 이지런을 각 9km로 편안하게 배분합니다.","d":[["S",0,"선택 · 가벼운 하체 보강","앞선 일요일에서 회복됐을 때만 15~25분. 피로하면 가동성으로 대체"],["NSM",10,"NSM 3×9분","5:10~5:20/km · 반복 후반 160~168bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",22,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"W10","m":"2월","ph":"특이성","s":"2027-02-01","note":"2/7 하프가 이번 주 유일한 강한 세션입니다. 참가 대회·코스는 별도 확인합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",4,"가벼운 조깅","6:40~7:15/km · 피로하면 휴식"],["R",21.0975,"하프 기록 점검","참가 확정 및 회복 양호 시 실시. 미확정이면 16~18km 이지로 대체. 대회 전 가동성·걷기와 완주 후 걷기는 거리 합계에서 제외"]]},
 {"w":"W11","m":"2월","ph":"특이성","s":"2027-02-08","note":"2/8은 휴식. 2/9도 회복이 확인된 경우에만 가볍게 달립니다. 이번 주 MP·NSM은 쉽니다.","d":[["X",0,"하프 다음 날 휴식","달리기와 하체 근력은 쉬고, 편하면 가볍게 걷기"],["E",5,"하프 후 회복 조깅","선택 · 6:45~7:15/km · 근육통이나 보행 불편이 남으면 휴식"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["E",8,"이지런","대화 가능한 강도 · 화요일을 건너뛰었다면 5~6km부터"],["X",0,"휴식","하프 회복 주. 일요일 이지 롱런을 앞두고 휴식"],["E",5,"이지런","6:35~7:00/km · 아주 편하게"],["L",22,"롱런","전 구간 이지 · 하프 피로가 남으면 16~18km 또는 휴식"]]},
-{"w":"W12","m":"2월","ph":"특이성","s":"2027-02-15","note":"1차 MP 롱런 주. 하프와 2/14 롱런의 피로가 풀렸다면 24km 중 마지막 5km를 기본 목표 MP로 달립니다. 피로가 남으면 MP를 빼고 일요일 거리를 줄입니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",9,"이지런","6:20~6:50/km 참고 · 1차 MP 롱런에 대비해 편하게"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",24,"1차 MP 적응 롱런","이지 19km + 기본 MP 5km(5:12/km 전후). 호흡·폼·보급에 여유가 있는지 확인합니다. 하프나 직전 롱런의 피로가 남으면 이지 20~22km로 전환하고, 피로가 크면 더 줄이거나 쉽니다."]],"options":[["일요일 이지 20~22km",[[6,[20,22]]]],["수요일 휴식 + 일요일 이지 20~22km",[[2,0],[6,[20,22]]]]]},
-{"w":"W13","m":"2월","ph":"특이성","s":"2027-02-22","note":"피크 상한 59km. 2/21의 후반 MP 5km가 여유로웠고 이후 1~2일 동안 수면·다리 상태와 이지런 체감이 평소 수준으로 돌아왔을 때만 후반 MP 9km를 선택합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡 · 주간 볼륨 분산"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡 · 주간 볼륨 분산"],["X",0,"휴식","완전 휴식"],["E",6,"이지런","6:35~7:00/km · 일요일 대비"],["L",27,"2차 레이스 리허설 롱런 · MP 9km는 조건부","조건 충족 시 이지 18km + 기본 MP 9km(5:12/km 전후). 회복이 애매하지만 이지 구간이 편안하면 MP는 5~6km까지만. 피로가 남으면 이지 22~24km 또는 더 짧게. 어떤 경우든 27km와 2시간 45분 중 먼저 도달할 때 종료합니다."]],"options":[["수요일 휴식 + 일요일 27km",[[2,0]]],["일요일 이지 22~24km",[[6,[22,24]]]],["수요일 휴식 + 일요일 이지 22~24km",[[2,0],[6,[22,24]]]]]},
+{"w":"W12","m":"2월","ph":"특이성","s":"2027-02-15","note":"1차 MP 롱런 주. 하프와 2/14 롱런의 피로가 풀렸다면 24km 중 마지막 5km를 기본 목표 MP로 달립니다. 피로가 남으면 MP를 빼고 일요일 거리를 줄입니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",9,"이지런","6:20~6:50/km 참고 · 1차 MP 롱런에 대비해 편하게"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",9,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",8,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",24,"1차 MP 적응 롱런","이지 19km + 기본 MP 5km(5:12/km 전후). 호흡·폼·보급에 여유가 있는지 확인합니다. 하프나 직전 롱런의 피로가 남으면 이지 20~22km로 전환하고, 피로가 크면 더 줄이거나 쉽니다."]]},
+{"w":"W13","m":"2월","ph":"특이성","s":"2027-02-22","note":"피크 상한 59km. 2/21의 후반 MP 5km가 여유로웠고 이후 1~2일 동안 수면·다리 상태와 이지런 체감이 평소 수준으로 돌아왔을 때만 후반 MP 9km를 선택합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡 · 주간 볼륨 분산"],["E",6,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 + 코어 10분 · 피로 시 0km 휴식"],["E",10,"이지런","6:20~6:50/km · 대화 가능한 호흡 · 주간 볼륨 분산"],["X",0,"휴식","완전 휴식"],["E",6,"이지런","6:35~7:00/km · 일요일 대비"],["L",27,"2차 레이스 리허설 롱런 · MP 9km는 조건부","조건 충족 시 이지 18km + 기본 MP 9km(5:12/km 전후). 회복이 애매하지만 이지 구간이 편안하면 MP는 5~6km까지만. 피로가 남으면 이지 22~24km 또는 더 짧게. 어떤 경우든 27km와 2시간 45분 중 먼저 도달할 때 종료합니다."]]},
 {"w":"W14","m":"3월","ph":"테이퍼","s":"2027-03-01","note":"테이퍼 1주차(주 5회 마지막 주). 빈도는 유지하되 전체 볼륨을 줄이고, 다음 주부터 주 4회로 전환합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["NSM",8,"NSM 3×4분 · 선택","선택 · 조건 미충족 시 같은 거리 이지런. 5:12~5:22/km · 반복 후반 155~165bpm 참고 · 반복 사이 90초 조깅. 워밍업 2km + 반복·회복 + 쿨다운 이지로 총거리 맞추기"],["E",5,"회복 조깅 · 선택","6:45~7:15/km · 140bpm 이하 아주 편하게 · 피로 시 0km 휴식"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",5,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",17,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"W15","m":"3월","ph":"테이퍼","s":"2027-03-08","note":"테이퍼 2주차. 짧은 MP 한 번과 가벼운 롱런으로 마무리합니다.","d":[["S",0,"선택 · 가동성","10~15분 · 뻐근하면 휴식"],["MP",8,"마라톤 페이스","이지 3km + MP 3km(5:12/km 전후) + 이지 2km. 레이스화 최종 점검"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["E",7,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식",""],["E",3,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["L",11,"롱런","6:10~6:40/km 참고 · 전 구간 이지"]]},
 {"w":"W16","m":"3월","ph":"레이스","s":"2027-03-15","note":"테이퍼 마지막 주. 대회 전 훈련은 12km이며 주간 합계에는 풀코스도 포함됩니다.","d":[["X",0,"휴식","장비 점검 — 신발·양말·복장·젤·배번"],["E",5,"이지런","6:20~6:50/km · 대화 가능한 호흡"],["X",0,"휴식","가벼운 걷기 또는 가동성 운동"],["MP",5,"마라톤 페이스","이지 2km + MP 1km(5:12/km 전후) + 이지 2km. 피로하면 전 구간 이지"],["X",0,"휴식","탄수화물 로딩 시작"],["E",2,"레이스 전 조깅","아주 가볍게 · 다리가 무거우면 휴식"],["R",42.195,"서울마라톤 풀코스","기본 3:40 · 도전 3:30은 사전 검증 시 선택. 초반은 계획보다 힘들면 속도를 낮추기"]]}
 ];
- "use strict";
 
 const $ = id => document.getElementById(id);
 const escape = value => String(value).replace(/[&<>"']/g, char => ({
@@ -791,7 +733,8 @@ function summarize(days) {
       actual += toUnits(log.km);
       recorded++;
     }
-    if (day.km > 0 && !day.optional) {
+    // 일정 선택으로 휴식이 된 날은 계획된 기본 러닝에서 뺀다.
+    if (high > 0 && !day.optional) {
       total++;
       if (log?.status === "done") completed++;
     }
@@ -949,9 +892,10 @@ function renderDay() {
 }
 function syncLogFields() {
   const done = $("logStatus").value === "done";
-  $("distanceField").hidden = !done || dates.get(activeDate).km === 0;
+  const plan = selectedDay(dates.get(activeDate));
+  $("distanceField").hidden = !done || bounds(plan.km)[1] === 0;
   $("logDistance").disabled = $("distanceField").hidden;
-  $("timeField").hidden = !done || !Object.hasOwn(milestoneNames, activeDate) || selectedDay(dates.get(activeDate)).type === "X";
+  $("timeField").hidden = !done || !Object.hasOwn(milestoneNames, activeDate) || plan.type === "X";
   $("logTime").disabled = $("timeField").hidden;
   $("timeHint").hidden = $("timeField").hidden;
   $("timeNotice").hidden = !done || !$("timeField").hidden;
