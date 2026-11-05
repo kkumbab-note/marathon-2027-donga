@@ -144,7 +144,7 @@ h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:800;letter-spacing:-.065em;line
 main{padding-bottom:40px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.035)}
 .overview{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
-.today{background:#fff;border-color:var(--line);border-left:5px solid var(--accent);padding:28px}
+.today{position:relative;background:#fff;border-color:var(--line);border-left:5px solid var(--accent);padding:28px}
 .today h2{font-size:1.7rem;letter-spacing:-.04em}
 .today .metrics b{font-size:1.2rem}
 .today .detail-copy{font-size:1rem}
@@ -177,10 +177,9 @@ main{padding-bottom:40px}
 .day,.blank{min-width:0;min-height:126px;border:0;border-radius:0}
 .blank{background:#f8f9fa;padding:10px;color:#89919d;font-size:.8rem}
 .day{display:grid;align-content:start;gap:6px;padding:12px;text-align:left;background:#fff;position:relative}
-.day.done{background:#e8f6ec}
-.day.skipped{background:#f4f2ee}
+.day.skipped{background:#f8f8f7}
+.day.skipped>:not(.stamp){opacity:.45}
 .day.today-cell{box-shadow:inset 0 0 0 2px var(--accent);background:#fff6f5}
-.day.done.today-cell{background:#e8f6ec}
 .day.race-day{border-bottom:3px solid #c62828}
 .day.race-day .date-num{color:#b51e1e}
 .day .row{gap:3px;flex-wrap:nowrap}
@@ -189,6 +188,21 @@ main{padding-bottom:40px}
 .day .distance,.day .flag{font-size:.76rem;color:var(--muted);line-height:1.3}
 .day .flag{color:var(--accent);font-weight:800}
 .day .distance .small{display:none}
+/* 완료·건너뜀 도장: 완료는 빨간 원형, 건너뜀은 회색 사각. 잉크처럼 아래 글자와 겹쳐 보이게 multiply로 찍는다 */
+.stamp{--r:-12deg;--s:58px;position:absolute;display:grid;place-items:center;color:#c42a2e;border:2px solid currentColor;font-size:calc(var(--s) * .27);font-weight:900;letter-spacing:-.03em;line-height:1;white-space:nowrap;transform:rotate(var(--r));opacity:.88;mix-blend-mode:multiply;pointer-events:none;user-select:none}
+.stamp::before{content:"";position:absolute;inset:3px;border:1px solid currentColor;border-radius:inherit}
+.stamp.done{width:var(--s);height:var(--s);border-radius:50%}
+.stamp.skipped{color:#4a515c;height:calc(var(--s) * .52);padding:0 .55em;border-radius:6px}
+.stamp.pressed{animation:stamp-press .45s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes stamp-press{0%{opacity:0;transform:rotate(var(--r)) scale(1.8)}60%{opacity:.95;transform:rotate(var(--r)) scale(.93)}100%{transform:rotate(var(--r)) scale(1)}}
+@media(prefers-reduced-motion:reduce){.stamp.pressed{animation:none}}
+.day .stamp{right:10px;bottom:10px}
+.today .stamp{--s:78px;top:24px;right:26px}
+.today:has(.stamp) .overline,.today:has(.stamp) h2{padding-right:96px}
+#dayStamp .stamp{--s:64px;top:76px;right:24px}
+#dayDialog:has(#dayStamp .stamp) h2{padding-right:84px}
+.milestone .stamp{--s:38px;position:relative;flex:none;border-width:1.5px;font-size:10.5px}
+.milestone .stamp::before{inset:2px}
 /* 표 · 옵션 · 점검 */
 .lower{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
 .stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
@@ -209,7 +223,7 @@ tr.hi td{background:#fff4f3}
 .milestone{display:flex;gap:8px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:.61rem 0}
 .milestone:first-child{margin-top:.6rem}
 .milestone button{flex:0 0 min(160px,70%);min-height:36px;text-align:left;font-size:.78rem;padding:.35rem .48rem}
-.milestone span{text-align:right;font-size:.78rem;color:var(--muted)}
+.milestone>span{display:flex;align-items:center;justify-content:flex-end;gap:7px;text-align:right;font-size:.78rem;color:var(--muted)}
 .milestone-group{margin-top:1rem}
 .milestone-group h3{display:flex;align-items:center;gap:.45rem}
 .milestone-group.check .milestone button,.milestone-group.race .milestone button{color:#b51e1e;border-color:#c62828}
@@ -267,8 +281,13 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
   .day .date-num{font-size:.87rem}
   .day .distance{font-size:.65rem}
   .day .badge{font-size:.62rem;padding:.05rem .22rem}
-  .day.done .date-num::after{content:" ✓";color:var(--accent)}
-  .day.skipped .date-num::after{content:" –";color:var(--amber)}
+  /* 좁은 칸에서도 넘치지 않도록 칸 아래 가운데에 찍는다 */
+  .day .stamp{left:0;right:0;bottom:5px;margin:0 auto;border-width:1.5px}
+  .day .stamp::before{inset:2px}
+  .day .stamp.done{--s:34px;font-size:9.5px}
+  .day .stamp.skipped{width:max-content;height:20px;padding:0 3px;border-radius:4px;font-size:10px}
+  .today .stamp{--s:62px;top:16px;right:16px}
+  .today:has(.stamp) .overline,.today:has(.stamp) h2{padding-right:74px}
 }
 </style>
 </head>
@@ -491,6 +510,7 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
 <dialog id="dayDialog" aria-labelledby="dayHeading">
   <div class="row"><p class="overline" id="dayDate"></p><button type="button" data-close autofocus>닫기</button></div>
   <h2 id="dayHeading"></h2>
+  <div id="dayStamp"></div>
   <div id="dayPlan"></div>
   <div id="dayChoices" class="choice-list"></div>
   <form id="logForm">
@@ -731,6 +751,15 @@ function badge(plan) {
   return '<span class="badge b-' + plan.type + '">' + plan.type + "</span>";
 }
 const statusName = log => log?.status === "done" ? "완료" : log?.status === "skipped" ? "건너뜀" : "";
+// 방금 기록을 바꾼 날짜. 이 날짜의 도장만 찍히는 움직임을 보여 준다.
+let pressedDate = null;
+function stamp(date, status, pressed = date === pressedDate) {
+  if (status !== "done" && status !== "skipped") return "";
+  // 날짜마다 기울기를 조금씩 달리해 손으로 찍은 느낌을 낸다.
+  const tilt = [-14, -9, -12, -7, -11][Number(date.slice(8)) % 5];
+  return '<span class="stamp ' + status + (pressed ? " pressed" : "") + '" style="--r:' + tilt + 'deg">'
+    + statusName({status}) + "</span>";
+}
 function summarize(days) {
   let original = 0, min = 0, max = 0, actual = 0, recorded = 0, total = 0, completed = 0;
   for (const day of days) {
@@ -780,8 +809,8 @@ function renderOverview() {
     const plan = selectedDay(day);
     const log = state.logs[today];
     $("todayHeading").textContent = plan.title;
-    $("today").innerHTML = '<div class="metrics">' + badge(plan) + "<b>" + dayKm(plan.km) + "</b>"
-      + (statusName(log) ? "<span>" + statusName(log) + "</span>" : "") + "</div>"
+    $("today").innerHTML = stamp(today, log?.status)
+      + '<div class="metrics">' + badge(plan) + "<b>" + dayKm(plan.km) + "</b></div>"
       + '<p class="detail-copy">' + escape(plan.detail || "오늘 일정의 상세와 기록을 확인하세요.") + "</p>"
       + dayButton(today, "오늘 훈련 상세 · 기록", true);
   } else {
@@ -816,17 +845,18 @@ function renderCalendar() {
     }
     const plan = selectedDay(day);
     const log = state.logs[date];
-    const flag = statusName(log) || (plan.adjusted ? "조정됨" : day.optional ? "선택" : "");
+    // 완료·건너뜀은 도장으로 보여 주고, 글자 표시는 조정·선택 여부만 남긴다.
+    const flag = plan.adjusted ? "조정됨" : day.optional ? "선택" : "";
     const category = plan.type === "R" ? (date === race ? "대회 " : "기록 점검 ")
       : plan.type === "L" && Object.hasOwn(milestoneNames, date) ? "롱런 점검 " : "";
-    const title = longDate(date) + " " + category + plan.title + " " + dayKm(plan.km) + " " + flag;
+    const title = [longDate(date), category + plan.title, dayKm(plan.km), flag, statusName(log)].filter(Boolean).join(" ");
     slots.push('<button type="button" data-day="' + date + '" class="day ' + (log?.status || "") + (category ? " race-day" : "")
       + (date === today ? ' today-cell" aria-current="date' : "") + '" aria-label="' + escape(title) + '">'
       + '<span class="row"><span class="date-num">' + Number(date.slice(8)) + "</span>" + badge(plan) + "</span>"
       + '<span class="day-title">' + escape(plan.title) + '</span><span class="distance"><span class="full">'
       + (bounds(plan.km)[1] > 0 ? dayKm(plan.km) : "") + '</span><span class="small">'
       + (bounds(plan.km)[1] > 0 ? rangeText(...bounds(plan.km), 1) : "") + "</span></span>"
-      + '<span class="flag">' + flag + "</span></button>");
+      + '<span class="flag">' + flag + "</span>" + stamp(date, log?.status) + "</button>");
   }
   $("calendar").innerHTML = slots.join("");
 }
@@ -849,9 +879,10 @@ function renderTables() {
   const milestoneGroup = (title, className, entries) => '<div class="milestone-group ' + className + '"><h3><span class="badge b-'
     + className + '">' + (className === "check" ? "점검" : "대회") + '</span> ' + title + '</h3>' + entries.map(([date, name]) => {
       const log = state.logs[date];
-      const label = [statusName(log), log?.time, log?.km != null ? kmText(log.km, 4) + " km" : ""].filter(Boolean);
+      const label = [log?.time, log?.km != null ? kmText(log.km, 4) + " km" : ""].filter(Boolean);
+      const mark = stamp(date, log?.status);
       return '<div class="milestone">' + dayButton(date, shortDate(date) + " " + name)
-        + "<span>" + (label.length ? escape(label.join(" · ")) : "미기록") + "</span></div>";
+        + "<span>" + (label.length ? escape(label.join(" · ")) : mark ? "" : "미기록") + mark + "</span></div>";
     }).join("") + "</div>";
   const milestones = Object.entries(milestoneNames);
   $("milestones").innerHTML = milestoneGroup("기록 점검", "check", milestones.filter(([date]) => date !== race))
@@ -901,8 +932,9 @@ function renderDay() {
   $("dayChoices").innerHTML = (choiceDatesByDay.get(day.date) || []).map(date => choiceControl(date, date !== day.date)).join("");
   syncLogFields();
 }
-function syncLogFields() {
+function syncLogFields(pressed = false) {
   const done = $("logStatus").value === "done";
+  $("dayStamp").innerHTML = stamp(activeDate, $("logStatus").value, pressed);
   const plan = selectedDay(dates.get(activeDate));
   $("distanceField").hidden = !done || bounds(plan.km)[1] === 0;
   $("logDistance").disabled = $("distanceField").hidden;
@@ -947,7 +979,7 @@ $("dayDialog").addEventListener("close", () => {
   opener = null;
 });
 $("weekPicker").addEventListener("change", renderWeekChoices);
-$("logStatus").addEventListener("change", syncLogFields);
+$("logStatus").addEventListener("change", () => syncLogFields(true));
 document.addEventListener("change", event => {
   const select = event.target.closest("select[data-choice]");
   if (!select) return;
@@ -978,11 +1010,13 @@ $("logForm").addEventListener("submit", event => {
     return;
   }
   const logs = {...state.logs};
+  if (status && status !== state.logs[activeDate]?.status) pressedDate = activeDate;
   if (!status && !note) delete logs[activeDate];
   else logs[activeDate] = {status, km, time, note};
   save({...state, logs}, "훈련 기록을 저장했습니다.");
   $("dayDialog").close();
   render();
+  pressedDate = null;
 });
 
 let pendingBackup = null;
