@@ -204,6 +204,13 @@ main{padding-bottom:40px}
 #dayDialog:has(#dayStamp .stamp) h2{padding-right:84px}
 .milestone .stamp{--s:38px;position:relative;flex:none;border-width:1.5px;font-size:10.5px}
 .milestone .stamp::before{inset:2px}
+/* 기록을 저장하면 저장 버튼에서 도장 커서가 날아와 그날 칸에 도장을 찍는다 */
+.stamp.waiting{opacity:0}
+.stamp-cursor,.stamp-ripple{position:fixed;left:0;top:0;pointer-events:none;z-index:60}
+.stamp-cursor{width:48px;height:48px;color:#c42a2e;transform-origin:3px 2px;filter:drop-shadow(0 3px 4px rgba(24,25,28,.28))}
+.stamp-cursor svg{display:block;width:100%;height:100%}
+.stamp-ripple{border:2px solid currentColor;border-radius:50%;color:#c42a2e}
+.stamp-cursor.skipped,.stamp-ripple.skipped{color:#4a515c}
 /* 표 · 옵션 · 점검 */
 .lower{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
 .stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
@@ -773,6 +780,81 @@ function stamp(date, status, pressed = date === pressedDate) {
   return '<span class="stamp ' + status + (pressed ? " pressed" : "") + '" style="--r:' + tilt + 'deg">'
     + statusName({status}) + "</span>";
 }
+// 도장 커서: 화살표 끝(3,2)이 찍는 지점이고, 오른쪽 아래에 도장 도구 표시가 붙어 있다.
+const cursorSvg = '<svg viewBox="0 0 48 48" aria-hidden="true">'
+  + '<path d="M3 2v22.5l6.2-6 4.3 9.6 3.9-1.7-4.2-9.4h8.6z" fill="#fff" stroke="#18191c" stroke-width="1.6" stroke-linejoin="round"/>'
+  + '<g fill="currentColor" stroke="#fff" stroke-width="1.6" paint-order="stroke">'
+  + '<circle cx="34" cy="25.5" r="3.6"/><rect x="32" y="28" width="4" height="6.2" rx="1.3"/>'
+  + '<rect x="26" y="33.6" width="16" height="6.6" rx="2.2"/><rect x="24.5" y="42.4" width="19" height="2.6" rx="1.3" opacity=".6"/></g></svg>';
+function stampTarget(date, where) {
+  const pick = {
+    calendar: () => $("calendar").querySelector('[data-day="' + date + '"] .stamp'),
+    today: () => date === today ? $("today").querySelector(".stamp") : null,
+    milestone: () => $("milestones").querySelector('[data-day="' + date + '"]')?.closest(".milestone").querySelector(".stamp")
+  };
+  return pick[where]?.() || pick.calendar() || pick.today();
+}
+// from: 저장 버튼 위치, where: 기록 창을 연 곳(달력·오늘 카드·점검 목록)
+function flyStamp(date, status, where, from) {
+  const target = stampTarget(date, where);
+  if (!target || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // 찍히는 움직임(처음 1.8배)이 멈춘 상태에서 도장의 실제 위치를 잰다.
+  target.classList.replace("pressed", "waiting");
+  const end = target.getBoundingClientRect();
+  // 도장이 화면 밖에 있으면 커서 없이 도장만 찍힌다.
+  if (end.top < 0 || end.bottom > innerHeight) {
+    target.classList.replace("waiting", "pressed");
+    return;
+  }
+  document.querySelectorAll(".stamp-cursor, .stamp-ripple").forEach(el => el.remove());
+  document.querySelectorAll(".stamp.pressed").forEach(el => el.classList.remove("pressed"));
+
+  const cursor = document.createElement("div");
+  cursor.className = "stamp-cursor " + status;
+  cursor.innerHTML = cursorSvg;
+  document.body.append(cursor);
+  const sx = from.left + from.width / 2, sy = from.top + from.height / 2;
+  const ex = end.left + end.width / 2, ey = end.top + end.height / 2;
+  const dist = Math.hypot(ex - sx, ey - sy) || 1;
+  // 시작점과 도장 사이를 위로 볼록한 곡선으로 잇는다.
+  let nx = (ey - sy) / dist, ny = -(ex - sx) / dist;
+  if (ny > 0) { nx = -nx; ny = -ny; }
+  const lift = Math.min(140, dist * .35);
+  const cx = (sx + ex) / 2 + nx * lift, cy = (sy + ey) / 2 + ny * lift;
+  const at = (x, y, extra = "") => "translate(" + (x - 3).toFixed(1) + "px," + (y - 2).toFixed(1) + "px)" + extra;
+  const path = [];
+  for (let i = 0; i <= 16; i++) {
+    const p = i / 16;
+    const t = p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2;
+    const x = (1 - t) ** 2 * sx + 2 * (1 - t) * t * cx + t * t * ex;
+    const y = (1 - t) ** 2 * sy + 2 * (1 - t) * t * cy + t * t * ey;
+    path.push({transform:at(x, y, " rotate(" + (-12 * (1 - t)).toFixed(1) + "deg)"), opacity:Math.min(1, p * 5)});
+  }
+  const land = () => target.classList.replace("waiting", "pressed");
+  cursor.animate(path, {duration:Math.min(820, Math.max(460, 360 + dist * .55)), fill:"forwards"}).finished
+    .then(() => cursor.animate([{transform:at(ex, ey)}, {transform:at(ex, ey, " scale(.8)")}],
+      {duration:90, easing:"ease-in", fill:"forwards"}).finished)
+    .then(() => {
+      land();
+      const size = Math.max(end.width, end.height) * 1.15;
+      const ripple = document.createElement("div");
+      ripple.className = "stamp-ripple " + status;
+      ripple.style.width = ripple.style.height = size + "px";
+      document.body.append(ripple);
+      const ring = "translate(" + (ex - size / 2).toFixed(1) + "px," + (ey - size / 2).toFixed(1) + "px)";
+      // 도장이 종이에 닿는 순간(찍는 움직임의 약 60%)에 잉크가 퍼지듯 고리가 번진다.
+      ripple.animate([
+        {transform:ring + " scale(.6)", opacity:0},
+        {offset:.3, transform:ring + " scale(.6)", opacity:0},
+        {offset:.31, transform:ring + " scale(.62)", opacity:.5, easing:"ease-out"},
+        {transform:ring + " scale(1.35)", opacity:0}
+      ], {duration:750, fill:"both"}).finished.finally(() => ripple.remove());
+      return cursor.animate([{transform:at(ex, ey, " scale(.8)"), opacity:1}, {transform:at(ex + 26, ey - 22), opacity:0}],
+        {duration:460, delay:140, easing:"ease-out", fill:"forwards"}).finished;
+    })
+    .catch(() => {})
+    .finally(() => { cursor.remove(); land(); });
+}
 function summarize(days) {
   let original = 0, min = 0, max = 0, actual = 0, recorded = 0, total = 0, completed = 0;
   for (const day of days) {
@@ -1037,9 +1119,14 @@ function syncLogFields(pressed = false) {
   $("timeHint").hidden = $("timeField").hidden;
   $("timeNotice").hidden = !done || !$("timeField").hidden;
 }
+// 기록 창을 연 곳. 다시 그린 뒤에도 같은 곳의 버튼으로 포커스와 도장 커서를 보낸다.
+let openerArea = "calendar";
+const areaOf = el => el?.closest(".today") ? "today" : el?.closest("#milestones") ? "milestone" : "calendar";
+const areaRoot = area => area === "today" ? $("today") : area === "milestone" ? $("milestones") : $("calendar");
 function openDay(date, trigger) {
   activeDate = date;
   opener = trigger;
+  openerArea = areaOf(trigger);
   const log = state.logs[date];
   $("logStatus").value = log?.status || "";
   $("logDistance").value = log?.km ?? "";
@@ -1078,7 +1165,7 @@ $("dayDialog").addEventListener("close", () => {
   if (opener?.isConnected) opener.focus();
   else {
     const selector = 'button[data-day="' + activeDate + '"]';
-    ($("calendar").querySelector(selector) ?? document.querySelector(selector))?.focus();
+    (areaRoot(openerArea).querySelector(selector) ?? $("calendar").querySelector(selector) ?? document.querySelector(selector))?.focus();
   }
   activeDate = null;
   opener = null;
@@ -1119,9 +1206,12 @@ $("logForm").addEventListener("submit", event => {
   if (!status && !note) delete logs[activeDate];
   else logs[activeDate] = {status, km, time, note};
   save({...state, logs}, "훈련 기록을 저장했습니다.");
+  const from = $("logForm").querySelector('[type="submit"]').getBoundingClientRect();
+  const stamped = pressedDate;
   $("dayDialog").close();
   render();
   pressedDate = null;
+  if (stamped) flyStamp(stamped, status, openerArea, from);
 });
 
 let pendingBackup = null;
