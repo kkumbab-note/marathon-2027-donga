@@ -116,17 +116,17 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   --muted:#f4f4f5;
   --muted-foreground:#52525b;
   --border:#e4e4e7;
-  --input:#a1a1aa;
+  --input:#8e8e97;
   --primary:#18181b;
   --primary-foreground:#fafafa;
   --accent:#c42a2e;
   --radius:8px;
   font:16px/1.55 'RunPlan Sans','Malgun Gothic',sans-serif;
-  letter-spacing:-.025em;
 }
-*{box-sizing:border-box}
+/* 자간은 요소마다 자기 글자 크기 기준 -0.025em. :root에 한 번만 주면 px로 상속되어 크기별로 값이 달라진다 */
+*{box-sizing:border-box;letter-spacing:-.025em}
 body{margin:0;background:var(--background);color:var(--foreground)}
-button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 button,select,summary{cursor:pointer}
 :focus-visible{outline:2px solid var(--foreground);outline-offset:2px}
 button{border:1px solid var(--border);background:var(--card);border-radius:6px;padding:8px 12px;font-weight:500;line-height:20px}
@@ -150,7 +150,7 @@ h3{font-size:1rem;font-weight:600}
 .hero-inner{position:relative;top:16px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:256px}
 .hero-inner>div:first-child,.hero-inner>.goals{align-self:start}
 .eyebrow{font-size:.75rem;font-weight:600}
-.hero .eyebrow{color:var(--muted-foreground)}
+.hero .eyebrow{display:inline-block;margin-left:-8px;padding:0 8px;border-radius:4px;background:var(--background);color:var(--muted-foreground);line-height:20px}
 h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:700;line-height:1.2;margin:8px 0}
 .hero .sub{font-size:.875rem;font-weight:600}
 .goals{display:flex;gap:8px;flex-wrap:wrap}
@@ -182,22 +182,23 @@ main{padding:16px 0 40px}
 .controls button{font-size:.8125rem}
 .legend{display:flex;gap:4px 12px;flex-wrap:wrap;color:var(--muted-foreground);font-size:.75rem}
 .legend>span{display:inline-flex;align-items:center;gap:4px}
-/* 훈련 종류 배지: 종류마다 색을 달리해 한눈에 구분한다. 점검·대회는 빨강 */
+/* 훈련 종류 배지: 종류마다 색을 달리해 한눈에 구분한다. 점검·대회는 빨강.
+   색각 이상 대응 팔레트(Okabe–Ito) 기반 단색 칩. 쌍마다 CIEDE2000 ΔE 15 이상(정상), 10 이상(적색약·녹색약·청색약)을 측정으로 확인 */
 .badge{display:inline-block;border:1px solid transparent;border-radius:4px;padding:0 8px;font-size:.6875rem;font-weight:600;line-height:18px;background:var(--muted);color:var(--muted-foreground);white-space:nowrap}
-.b-E{color:#0b6048;background:#def2e6}
-.b-NSM{color:#6d366e;background:#f2e2f3}
-.b-L{color:#1b4a7b;background:#e1edf9}
-.b-MP{color:#82421e;background:#fae7d9}
-.b-TR{color:#575917;background:#f1f0d6}
-.b-S{color:#4f4277;background:#ece7f5}
-.b-X{color:#51545b;background:#ededed}
+.b-E{color:#fff;background:#007a5a}
+.b-NSM{color:#fff;background:#0a3d91}
+.b-L{color:#0b1f2e;background:#56b4e9}
+.b-MP{color:#2b1d00;background:#e69f00}
+.b-TR{color:#2b2900;background:#f0e442}
+.b-S{color:#2b0f1e;background:#cc79a7}
+.b-X{color:#fff;background:#6b6b73}
 .b-check,.b-race{background:var(--accent);border-color:var(--accent);color:#fff}
 .calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--border);border-top:1px solid var(--border)}
 .weekday{background:var(--muted);text-align:center;font-weight:600;padding:12px 8px;font-size:.875rem;color:var(--muted-foreground)}
 .day,.blank{min-width:0;min-height:128px;border:0;border-radius:0}
-.blank{background:var(--muted);padding:12px;color:#8e8e97;font-size:.8125rem}
+.blank{background:var(--muted);padding:12px;color:#6b6b73;font-size:.8125rem}
 .day{display:grid;align-content:start;gap:4px;padding:12px;text-align:left;background:var(--card);position:relative}
-.day.skipped>:not(.stamp){opacity:.45}
+.day.skipped .date-num,.day.skipped .day-title{color:var(--muted-foreground)}
 .day.today-cell{box-shadow:inset 0 0 0 2px var(--foreground)}
 .day.done{background:#fdeceb}
 .day.skipped{background:var(--muted)}
@@ -210,7 +211,7 @@ main{padding:16px 0 40px}
 .day .flag{color:var(--foreground);font-weight:600}
 .day .distance .small{display:none}
 /* 완료·건너뜀 도장: 완료는 빨간 원형, 건너뜀은 회색 사각. 잉크처럼 아래 글자와 겹쳐 보이게 multiply로 찍는다 */
-.stamp{--r:-12deg;--s:56px;position:absolute;display:grid;place-items:center;color:var(--accent);border:2px solid currentColor;font-size:calc(var(--s) * .27);font-weight:900;letter-spacing:-.03em;line-height:1;white-space:nowrap;transform:rotate(var(--r));opacity:.88;mix-blend-mode:multiply;pointer-events:none;user-select:none}
+.stamp{--r:-12deg;--s:56px;position:absolute;display:grid;place-items:center;color:var(--accent);border:2px solid currentColor;font-size:calc(var(--s) * .27);font-weight:900;letter-spacing:-.03em;line-height:1;white-space:nowrap;transform:rotate(var(--r));mix-blend-mode:multiply;pointer-events:none;user-select:none}
 .stamp::before{content:"";position:absolute;inset:3px;border:1px solid currentColor;border-radius:inherit}
 .stamp.done{width:var(--s);height:var(--s);border-radius:50%}
 .stamp.skipped{color:#52525b;height:calc(var(--s) * .52);padding:0 .55em;border-radius:6px}
