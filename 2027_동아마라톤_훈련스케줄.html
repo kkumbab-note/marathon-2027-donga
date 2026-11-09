@@ -106,164 +106,179 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 /* 글꼴: Pretendard(SIL OFL 1.1)에서 자주 쓰는 한글 2,350자·영문·기호와 굵기 400~930만 남긴 수정본(2MB → 317KB).
    OFL의 예약 글꼴 이름 조건에 따라 수정본 이름을 RunPlan Sans로 바꿈 */
 @font-face{font-family:'RunPlan Sans';src:url(runplan-sans.woff2) format('woff2');font-style:normal;font-weight:400 930;font-display:swap}
-/* 기본 */
-:root{color-scheme:light;--ink:#18191c;--muted:#5d5e63;--line:#e5e5e5;--surface:#fff;--paper:#f7f7f6;--accent:#b42326;--amber:#754b0e;font:16px/1.55 'RunPlan Sans','Malgun Gothic',sans-serif}
+/* 기본: shadcn/ui 무채색 토큰. 빨강(--accent)은 대회·점검 표시와 완료 도장에만 쓴다.
+   간격은 4px 배수, 모서리는 8px 이하, 자간은 tracking-tight(-0.025em) 기준 */
+:root{
+  color-scheme:light;
+  --background:#fafafa;
+  --foreground:#18181b;
+  --card:#fff;
+  --muted:#f4f4f5;
+  --muted-foreground:#52525b;
+  --border:#e4e4e7;
+  --input:#a1a1aa;
+  --primary:#18181b;
+  --primary-foreground:#fafafa;
+  --accent:#c42a2e;
+  --radius:8px;
+  font:16px/1.55 'RunPlan Sans','Malgun Gothic',sans-serif;
+  letter-spacing:-.025em;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink)}
-button,input,select,textarea{font:inherit;color:inherit}
+body{margin:0;background:var(--background);color:var(--foreground)}
+button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
 button,select,summary{cursor:pointer}
-button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #1475a6;outline-offset:3px}
-button{border:1px solid var(--line);background:white;border-radius:10px;padding:.52rem .75rem;font-weight:700}
-button:hover{border-color:var(--accent);background:#fff2f2}
-button.primary,button[aria-pressed="true"]{background:var(--accent);color:white;border-color:var(--accent)}
-a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--foreground);outline-offset:2px}
+button{border:1px solid var(--border);background:var(--card);border-radius:6px;padding:8px 12px;font-weight:500;line-height:20px}
+button:hover{background:var(--muted)}
+button.primary,button[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground)}
+button.primary:hover,button[aria-pressed="true"]:hover{background:#3f3f46}
+a{color:inherit;text-underline-offset:2px}
+summary{padding:8px 0}
 h1,h2,h3,h4,p{margin:0}
-h2{font-size:1.3rem;line-height:1.3}
-h3{font-size:1.03rem}
+h2{font-size:1.25rem;line-height:1.4;font-weight:600}
+h3{font-size:1rem;font-weight:600}
 .wrap{width:min(1280px,calc(100% - 48px));margin:auto}
 /* 상단: 완주 이미지를 전체에 깔고 제목 뒤를 부드럽게 처리 */
-.hero{position:relative;overflow:hidden;background:var(--paper);padding:48px 0 54px}
+.hero{position:relative;overflow:hidden;background:var(--background);padding:48px 0 56px}
 .hero-art{position:absolute;inset:0;overflow:hidden}
 /* 큰 이미지가 오기 전에 보이는 흐린 미리보기(40px WebP) */
 .hero-art::before{content:"";position:absolute;inset:0;background:url(data:image/webp;base64,UklGRqQBAABXRUJQVlA4IJgBAACQCACdASooABcAPtFapU4oJKMiKqgBABoJbACdM9kqLYAKAEdPuJlQPcsURo/cGacLwbSZvkJxAw/Aq1lla1QwGLkS0o0bgGtyhr61mAD+lcf8bANcQAMulqbEGnZrU1875RDRT5sVXUATIty28m8FbVX4YJOyMF9YWhDQaLm0r8il2ZBVbyrGomXKrdFcyGC7g1NHI1muG7TtcFjZeCmn1AXc84CmzWjtBfbAjfVm8G65TqBDxoLUzroCOH3YJdWu9JvssYQWSKd78qdiXwqu8Eccg3lScOAVfSw2nvq+M5Xs8ew03Qu+5XcdNgdBX8h9ZtXa+oEYk1FJZ4zfhltDR35W/AGAj1OeyE3M+h6KCNR9DqTqwH6u2JmZL9klXp6ivmDKspJ4o6X1N9YmtbV4E8+AyFiv8PeZy0uEmJcd1nQkERe0nR8o4PyPe8Gqbos4RmSXfRkDJfhqkEsy2Z86v+A6/ZlDp0Mrk7TOxEGEQsUbQxHwYfbIypZFQB69Gf1fuwvsRoLc14Tka2jzgV1lcY5qdJWEAAA=) center top/cover no-repeat;filter:blur(12px);transform:scale(1.08)}
 .hero-art picture{display:contents}
 .hero-art img{position:relative;display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
-.hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,250,249,.97) 0%,rgba(250,250,249,.92) 30%,rgba(250,250,249,.46) 54%,rgba(250,250,249,0) 75%);backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);pointer-events:none}
-.hero-inner{position:relative;top:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:260px}
+.hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,250,250,.97) 0%,rgba(250,250,250,.92) 30%,rgba(250,250,250,.46) 54%,rgba(250,250,250,0) 75%);backdrop-filter:blur(4px);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 72%);pointer-events:none}
+.hero-inner{position:relative;top:16px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px;min-height:256px}
 .hero-inner>div:first-child,.hero-inner>.goals{align-self:start}
-.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.15em}
-.hero .eyebrow{color:#a51d20}
-h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:800;letter-spacing:-.065em;line-height:1.18;margin:.5rem 0}
-.hero .sub{color:#a51d20;font-size:.88rem;font-weight:700}
+.eyebrow{font-size:.75rem;font-weight:600}
+.hero .eyebrow{color:var(--muted-foreground)}
+h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:700;line-height:1.2;margin:8px 0}
+.hero .sub{font-size:.875rem;font-weight:600}
 .goals{display:flex;gap:8px;flex-wrap:wrap}
-.goal{min-width:98px;display:grid;gap:5px;padding:12px 15px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:.73rem;color:var(--muted);white-space:nowrap}
-.goal b{font:800 1.3rem/1.2 'RunPlan Sans','Malgun Gothic',sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
-.goal:first-child{background:var(--accent);border-color:var(--accent);color:#fff}
-.goal:first-child b{color:#fff;font-weight:900;font-size:1.6rem}
+.goal{min-width:96px;display:grid;gap:4px;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);font-size:.75rem;color:var(--muted-foreground);white-space:nowrap}
+.goal b{font:700 1.25rem/1.2 'RunPlan Sans','Malgun Gothic',sans-serif;color:var(--foreground);font-variant-numeric:tabular-nums}
+.goal:first-child{background:var(--primary);border-color:var(--primary);color:#d4d4d8}
+.goal:first-child b{color:var(--primary-foreground);font-weight:800;font-size:1.5rem}
 /* 오늘 · 이번 주 */
-main{padding-bottom:40px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.035)}
-.overview{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
-.today{position:relative;background:#fff;border-color:var(--line);border-left:5px solid var(--accent);padding:28px}
-.today h2{font-size:1.7rem;letter-spacing:-.04em}
-.today .metrics b{font-size:1.2rem}
+main{padding:16px 0 40px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.overview{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.today{position:relative}
+.today h2{font-size:1.5rem;font-weight:700}
+.today .metrics b{font-size:1.125rem}
 .today .detail-copy{font-size:1rem}
-.week{background:#fff;padding:28px}
-.overline,.muted,.lede{color:var(--muted);font-size:.84rem}
-.overline{font-weight:800;margin-bottom:5px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:.65rem;flex-wrap:wrap}
-.detail-copy{margin:.55rem 0;color:var(--muted);font-size:.9rem;overflow-wrap:anywhere}
-.metrics{display:flex;flex-wrap:wrap;gap:.45rem 1.2rem;margin:.62rem 0;font-size:.82rem;color:var(--muted)}
-.metrics b{color:var(--ink);font-size:1rem;font-variant-numeric:tabular-nums}
-.statusline{min-height:1.5rem;margin:5px 0;color:var(--accent);font-size:.82rem}
+.overline,.muted,.lede{color:var(--muted-foreground);font-size:.8125rem}
+.overline{font-weight:600;margin-bottom:4px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.detail-copy{margin:8px 0;color:var(--muted-foreground);font-size:.875rem;overflow-wrap:anywhere}
+.metrics{display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0;font-size:.8125rem;color:var(--muted-foreground)}
+.metrics b{color:var(--foreground);font-size:1rem;font-variant-numeric:tabular-nums}
+.statusline{min-height:16px;margin:0;color:var(--foreground);font-size:.8125rem;line-height:16px;font-weight:500}
+.statusline:not(:empty){margin:8px 0}
 /* 월간 달력 */
 .calendar-card{padding:0;overflow:hidden}
-.calendar-header{padding:26px 28px 20px;display:grid;gap:14px}
-#calendarHeading{font-size:1.55rem;letter-spacing:-.04em}
-.controls{display:flex;gap:5px;flex-wrap:wrap}
-.controls button{font-size:.83rem;padding:.45rem .78rem;border-radius:99px}
-.legend{display:flex;gap:.42rem .7rem;flex-wrap:wrap;color:var(--muted);font-size:.72rem}
-.badge{display:inline-block;border-radius:5px;padding:.09rem .34rem;font-size:.69rem;font-weight:800;background:#eaf0ec;color:#36564b;white-space:nowrap}
-.b-E{color:#0b6048;background:#def2e6}
-.b-NSM{color:#6d366e;background:#f2e2f3}
-.b-L{color:#1b4a7b;background:#e1edf9}
-.b-MP{color:#82421e;background:#fae7d9}
-.b-TR{color:#575917;background:#f1f0d6}
-.b-S{color:#4f4277;background:#ece7f5}
-.b-X{color:#51545b;background:#ededed}
-.b-check,.b-race{color:#fff;background:var(--accent)}
-.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
-.weekday{background:#f6f6f5;text-align:center;font-weight:800;padding:12px 7px;font-size:.88rem;color:#343539}
-.day,.blank{min-width:0;min-height:126px;border:0;border-radius:0}
-.blank{background:#f8f9fa;padding:10px;color:#89919d;font-size:.8rem}
-.day{display:grid;align-content:start;gap:6px;padding:12px;text-align:left;background:#fff;position:relative}
+.calendar-header{padding:24px 24px 16px;display:grid;gap:12px}
+#calendarHeading{font-size:1.5rem;font-weight:700}
+.controls{display:flex;gap:4px;flex-wrap:wrap}
+.controls button{font-size:.8125rem}
+.legend{display:flex;gap:4px 12px;flex-wrap:wrap;color:var(--muted-foreground);font-size:.75rem}
+.legend>span{display:inline-flex;align-items:center;gap:4px}
+/* 훈련 종류 배지: 기본은 회색, 핵심 훈련(L·MP·NSM)은 검정 테두리, 점검·대회만 빨강 */
+.badge{display:inline-block;border:1px solid transparent;border-radius:4px;padding:0 8px;font-size:.6875rem;font-weight:600;line-height:18px;background:var(--muted);color:var(--muted-foreground);white-space:nowrap}
+.b-X{background:transparent;border-color:var(--border)}
+.b-L,.b-MP,.b-NSM{background:var(--card);border-color:var(--foreground);color:var(--foreground)}
+.b-check,.b-race{background:var(--accent);border-color:var(--accent);color:#fff}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--border);border-top:1px solid var(--border)}
+.weekday{background:var(--muted);text-align:center;font-weight:600;padding:12px 8px;font-size:.875rem;color:var(--muted-foreground)}
+.day,.blank{min-width:0;min-height:128px;border:0;border-radius:0}
+.blank{background:var(--muted);padding:12px;color:#8e8e97;font-size:.8125rem}
+.day{display:grid;align-content:start;gap:4px;padding:12px;text-align:left;background:var(--card);position:relative}
 .day.skipped>:not(.stamp){opacity:.45}
-.day.today-cell{box-shadow:inset 0 0 0 2px var(--accent);background:#fff6f5}
-.day.done,.day.done.today-cell{background:#ffe8ee}
-.day.skipped,.day.skipped.today-cell{background:#eeeff0}
-.day.race-day{border-bottom:3px solid #c62828}
-.day.race-day .date-num{color:#b51e1e}
-.day .row{gap:3px;flex-wrap:nowrap}
-.day .date-num{font-size:1rem}
-.day .day-title{font-size:.87rem;line-height:1.35;overflow-wrap:anywhere}
-.day .distance,.day .flag{font-size:.76rem;color:var(--muted);line-height:1.3}
-.day .flag{color:var(--accent);font-weight:800}
+.day.today-cell{box-shadow:inset 0 0 0 2px var(--foreground)}
+.day.done{background:#fdeceb}
+.day.skipped{background:var(--muted)}
+.day.race-day{border-bottom:2px solid var(--accent)}
+.day.race-day .date-num{color:var(--accent)}
+.day .row{gap:4px;flex-wrap:nowrap}
+.day .date-num{font-size:1rem;font-weight:600}
+.day .day-title{font-size:.875rem;font-weight:500;line-height:1.4;overflow-wrap:anywhere}
+.day .distance,.day .flag{font-size:.75rem;color:var(--muted-foreground);line-height:1.4}
+.day .flag{color:var(--foreground);font-weight:600}
 .day .distance .small{display:none}
 /* 완료·건너뜀 도장: 완료는 빨간 원형, 건너뜀은 회색 사각. 잉크처럼 아래 글자와 겹쳐 보이게 multiply로 찍는다 */
-.stamp{--r:-12deg;--s:58px;position:absolute;display:grid;place-items:center;color:#c42a2e;border:2px solid currentColor;font-size:calc(var(--s) * .27);font-weight:900;letter-spacing:-.03em;line-height:1;white-space:nowrap;transform:rotate(var(--r));opacity:.88;mix-blend-mode:multiply;pointer-events:none;user-select:none}
+.stamp{--r:-12deg;--s:56px;position:absolute;display:grid;place-items:center;color:var(--accent);border:2px solid currentColor;font-size:calc(var(--s) * .27);font-weight:900;letter-spacing:-.03em;line-height:1;white-space:nowrap;transform:rotate(var(--r));opacity:.88;mix-blend-mode:multiply;pointer-events:none;user-select:none}
 .stamp::before{content:"";position:absolute;inset:3px;border:1px solid currentColor;border-radius:inherit}
 .stamp.done{width:var(--s);height:var(--s);border-radius:50%}
-.stamp.skipped{color:#4a515c;height:calc(var(--s) * .52);padding:0 .55em;border-radius:6px}
+.stamp.skipped{color:#52525b;height:calc(var(--s) * .52);padding:0 .55em;border-radius:6px}
 .stamp.pressed{animation:stamp-press .45s cubic-bezier(.3,1.4,.5,1) both}
 @keyframes stamp-press{0%{opacity:0;transform:rotate(var(--r)) scale(1.8)}60%{opacity:.95;transform:rotate(var(--r)) scale(.93)}100%{transform:rotate(var(--r)) scale(1)}}
 @media(prefers-reduced-motion:reduce){.stamp.pressed{animation:none}}
-.day .stamp{right:10px;bottom:10px}
-.today .stamp{--s:78px;top:24px;right:26px}
+.day .stamp{right:8px;bottom:8px}
+.today .stamp{--s:80px;top:24px;right:24px}
 .today:has(.stamp) .overline,.today:has(.stamp) h2{padding-right:96px}
-#dayStamp .stamp{--s:64px;top:76px;right:24px}
-#dayDialog:has(#dayStamp .stamp) h2{padding-right:84px}
-.milestone .stamp{--s:38px;position:relative;flex:none;border-width:1.5px;font-size:10.5px}
+#dayStamp .stamp{--s:64px;top:80px;right:24px}
+#dayDialog:has(#dayStamp .stamp) h2{padding-right:80px}
+.milestone .stamp{--s:40px;position:relative;flex:none;border-width:1.5px;font-size:10.5px}
 .milestone .stamp::before{inset:2px}
 /* 기록을 저장하면 저장 버튼에서 도장 커서가 날아와 그날 칸에 도장을 찍는다 */
 .stamp.waiting{opacity:0}
 .stamp-cursor,.stamp-ripple{position:fixed;left:0;top:0;pointer-events:none;z-index:60}
-.stamp-cursor{width:48px;height:48px;color:#c42a2e;transform-origin:3px 2px;filter:drop-shadow(0 3px 4px rgba(24,25,28,.28))}
+.stamp-cursor{width:48px;height:48px;color:var(--accent);transform-origin:3px 2px;filter:drop-shadow(0 4px 4px rgba(24,24,27,.28))}
 .stamp-cursor svg{display:block;width:100%;height:100%}
-.stamp-ripple{border:2px solid currentColor;border-radius:50%;color:#c42a2e}
-.stamp-cursor.skipped,.stamp-ripple.skipped{color:#4a515c}
+.stamp-ripple{border:2px solid currentColor;border-radius:50%;color:var(--accent)}
+.stamp-cursor.skipped,.stamp-ripple.skipped{color:#52525b}
 /* 표 · 옵션 · 점검 */
-.lower{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
-.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
-.tbox{overflow-x:auto;margin:.55rem 0}
-table{width:100%;border-collapse:collapse;text-align:left;font-size:.81rem}
-th,td{padding:.53rem .45rem;border-bottom:1px solid var(--line);vertical-align:top}
-thead th{background:#f6f6f5;color:var(--muted)}
+.lower{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.tbox{overflow-x:auto;margin:12px 0}
+table{width:100%;border-collapse:collapse;text-align:left;font-size:.8125rem}
+th,td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top}
+thead th{background:var(--muted);color:var(--muted-foreground);font-weight:500}
 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 #weekly thead th:not(:first-child),[aria-labelledby="monthlyHeading"] thead th:not(:first-child){text-align:right;white-space:nowrap}
-tr.current td,tr.current th{background:#fff4f3}
-tr.hi td{background:#fff4f3}
-.week-select{display:block;min-height:36px;width:100%;max-width:470px;margin:.42rem 0;padding:.3rem .38rem;border:1px solid #aebfb6;border-radius:7px;background:white;font-size:.86rem}
+tr.current td,tr.current th,tr.hi td{background:var(--muted)}
+.week-select{display:block;min-height:40px;width:100%;max-width:480px;margin:8px 0;padding:8px;border:1px solid var(--input);border-radius:6px;background:var(--card);font-size:.875rem}
 .choice-list{display:grid;gap:8px}
-.choice-list h3{font-size:.9rem}
-.choice-list label{display:block;font-size:.84rem;font-weight:700}
-.choice-list select{margin-top:.23rem}
-.plan-changed{border-left:3px solid #71a88b;padding:.35rem .65rem;margin:.55rem 0;background:#f3f8f4}
-.milestone{display:flex;gap:8px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:.61rem 0}
-.milestone:first-child{margin-top:.6rem}
-.milestone button{flex:0 0 min(160px,70%);min-height:36px;text-align:left;font-size:.78rem;padding:.35rem .48rem}
-.milestone>span{display:flex;align-items:center;justify-content:flex-end;gap:7px;text-align:right;font-size:.78rem;color:var(--muted)}
-.milestone-group{margin-top:1rem}
-.milestone-group h3{display:flex;align-items:center;gap:.45rem}
-.milestone-group.check .milestone button,.milestone-group.race .milestone button{color:#b51e1e;border-color:#c62828}
-/* 원본 훈련 가이드 */
-.guide{margin-top:14px}
-.guide summary{font-size:1.12rem;font-weight:800}
-.guide section{padding:14px 0;border-top:1px solid var(--line);margin-top:12px}
-.guide .tag{font-size:.78rem;color:var(--muted)}
-.guide .rule,.guide .alert{background:#f5f6fa;padding:.6rem .75rem;border-radius:10px;margin-top:.48rem;font-size:.86rem}
-.guide .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,195px),1fr));gap:12px}
-.guide .cards>*{border:1px solid var(--line);padding:12px;border-radius:8px;margin-top:.5rem}
-.guide li,.guide p{font-size:.86rem}
-.guide ul,.guide ol{padding-left:1.15rem}
+.choice-list h3{font-size:.875rem}
+.choice-list label{display:block;font-size:.875rem;font-weight:500}
+.choice-list select{margin-top:4px}
+.plan-changed{padding:8px 12px;margin:8px 0;border-radius:6px;background:var(--muted)}
+.milestone{display:flex;gap:8px;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding:12px 0}
+.milestone:first-child{margin-top:8px}
+.milestone button{flex:0 0 min(176px,70%);min-height:40px;text-align:left;font-size:.8125rem;padding:8px 12px}
+.milestone>span{display:flex;align-items:center;justify-content:flex-end;gap:8px;text-align:right;font-size:.8125rem;color:var(--muted-foreground)}
+.milestone-group{margin-top:16px}
+.milestone-group h3{display:flex;align-items:center;gap:8px}
+/* 원본 훈련 가이드: 카드 안에 카드를 만들지 않고 구분선과 회색 안내 블록만 쓴다 */
+.guide{margin-top:16px}
+.guide summary{font-size:1.125rem;font-weight:600}
+.guide section{padding:16px 0;border-top:1px solid var(--border);margin-top:12px}
+.shead{display:flex;align-items:baseline;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;margin-bottom:8px}
+.guide .tag{font-size:.75rem;color:var(--muted-foreground)}
+.guide .rule,.guide .alert{background:var(--muted);padding:12px;border-radius:6px;margin-top:8px;font-size:.875rem}
+.guide .alert h3{margin-bottom:4px}
+.guide .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,192px),1fr));gap:24px}
+.guide .cards>*{margin-top:8px}
+.guide li,.guide p{font-size:.875rem}
+.guide ul,.guide ol{padding-left:20px;margin:8px 0}
 /* 대화상자 · 입력 */
-dialog{width:min(565px,calc(100% - 24px));max-height:90dvh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:22px;color:var(--ink);box-shadow:0 22px 70px rgba(23,28,49,.2)}
-dialog::backdrop{background:#22283f99}
-dialog h2{margin:.35rem 0}
-dialog hr{border:0;border-top:1px solid var(--line);margin:.8rem 0}
-fieldset{padding:0;border:0;margin:.7rem 0;display:grid;gap:8px;min-width:0}
-legend{font-weight:800;font-size:.88rem}
-.field{display:grid;gap:3px;font-size:.82rem;font-weight:700}
-.field input,.field select,.field textarea,dialog textarea{width:100%;border:1px solid #aebfb6;border-radius:7px;background:white;padding:.43rem .5rem}
+dialog{width:min(560px,calc(100% - 24px));max-height:90dvh;overflow:auto;border:1px solid var(--border);border-radius:var(--radius);padding:24px;background:var(--card);color:var(--foreground);box-shadow:0 8px 32px rgba(0,0,0,.12)}
+dialog::backdrop{background:rgba(9,9,11,.5)}
+dialog h2{margin:8px 0}
+dialog hr{border:0;border-top:1px solid var(--border);margin:12px 0}
+fieldset{padding:0;border:0;margin:12px 0;display:grid;gap:8px;min-width:0}
+legend{padding:0;font-weight:600;font-size:.875rem}
+.field{display:grid;gap:4px;font-size:.8125rem;font-weight:500}
+.field input,.field select,.field textarea,dialog textarea{width:100%;border:1px solid var(--input);border-radius:6px;background:var(--card);padding:8px 12px}
 .field textarea,dialog textarea{resize:vertical}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.help-links{display:flex;flex-wrap:wrap;gap:7px;margin:.75rem 0}
-.help-links button{font-size:.82rem;color:#9b2024;border-color:#e2bfc0;background:#fff8f8}
-.exercise-intro{font-size:.92rem;line-height:1.7;margin:.6rem 0}
-.exercise-list{padding-left:1.25rem;display:grid;gap:.7rem;margin:.8rem 0}
-.exercise-list li{font-size:.9rem;line-height:1.6}
-.exercise-note{background:#f6f7fa;border-radius:10px;padding:.75rem;font-size:.85rem;line-height:1.6}
-.error{color:#9d2929;font-size:.82rem;margin:.45rem 0}
-footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
+.help-links{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.help-links button{font-size:.8125rem}
+.exercise-intro{font-size:.9375rem;line-height:1.7;margin:12px 0}
+.exercise-list{padding-left:20px;display:grid;gap:12px;margin:12px 0}
+.exercise-list li{font-size:.9375rem;line-height:1.6}
+.exercise-note{background:var(--muted);border-radius:6px;padding:12px;font-size:.875rem;line-height:1.6}
+.error{color:#b91c1c;font-size:.8125rem;margin:8px 0}
+footer{margin:16px 0 0;color:var(--muted-foreground);font-size:.75rem}
 [hidden]{display:none!important}
 /* 태블릿 이하 */
 @media(max-width:1024px){
@@ -273,35 +288,34 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
   /* 폰(상단 높이 328px)에서 기록 시계 전체와 러너가 함께 보이는 가로 위치. 320~430px 폭 모두 충족 */
   .hero-art img{object-position:60% top}
   .hero-art::before{background-position:60% top}
-  .hero-art::after{background:linear-gradient(90deg,rgba(250,250,249,.97),rgba(250,250,249,.7) 38%,rgba(250,250,249,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
+  .hero-art::after{background:linear-gradient(90deg,rgba(250,250,250,.97),rgba(250,250,250,.7) 38%,rgba(250,250,250,.04) 90%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%);mask-image:linear-gradient(90deg,#000 0%,#000 20%,transparent 80%)}
 }
 /* 모바일 */
 @media(max-width:550px){
-  .card{padding:14px}
+  .card{padding:16px}
   .calendar-card{padding:0}
-  .today,.week{padding:20px}
-  .today h2{font-size:1.4rem}
-  .calendar-header{padding:18px 14px 14px}
-  #calendarHeading{font-size:1.3rem}
+  .today h2{font-size:1.375rem}
+  .calendar-header{padding:16px 16px 12px}
+  #calendarHeading{font-size:1.25rem}
   .goals{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-  .goal{min-width:0;padding:10px}
-  .goal b{font-size:1.1rem}
-  .goal:first-child b{font-size:1.35rem}
+  .goal{min-width:0;padding:8px 12px}
+  .goal b{font-size:1.125rem}
+  .goal:first-child b{font-size:1.25rem}
   .day,.blank{min-height:80px}
-  .day{padding:5px 4px;justify-items:start;gap:3px}
+  .day{padding:4px;justify-items:start;gap:4px}
   .day .row{flex-direction:column;align-items:flex-start}
   .day .day-title,.day .distance .full,.day .flag{display:none}
   .day .distance .small{display:inline}
-  .day .date-num{font-size:.87rem}
-  .day .distance{font-size:.65rem}
-  .day .badge{font-size:.62rem;padding:.05rem .22rem}
+  .day .date-num{font-size:.875rem}
+  .day .distance{font-size:.6875rem}
+  .day .badge{font-size:.625rem;padding:0 4px;line-height:14px}
   /* 좁은 칸에서도 넘치지 않도록 칸 아래 가운데에 찍는다 */
-  .day .stamp{left:0;right:0;bottom:5px;margin:0 auto;border-width:1.5px}
+  .day .stamp{left:0;right:0;bottom:4px;margin:0 auto;border-width:1.5px}
   .day .stamp::before{inset:2px}
-  .day .stamp.done{--s:34px;font-size:9.5px}
-  .day .stamp.skipped{width:max-content;height:20px;padding:0 3px;border-radius:4px;font-size:10px}
-  .today .stamp{--s:62px;top:16px;right:16px}
-  .today:has(.stamp) .overline,.today:has(.stamp) h2{padding-right:74px}
+  .day .stamp.done{--s:36px;font-size:10px}
+  .day .stamp.skipped{width:max-content;height:20px;padding:0 4px;border-radius:4px;font-size:10px}
+  .today .stamp{--s:64px;top:16px;right:16px}
+  .today:has(.stamp) .overline,.today:has(.stamp) h2{padding-right:80px}
 }
 </style>
 </head>
@@ -447,7 +461,7 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
 <section>
   <div class="shead"><h2>보강운동 루틴</h2><span class="tag">회복이 좋은 주에만 · 선택</span></div>
   <div class="cards">
-    <div class="card">
+    <div>
       <h3>A · 하체 근력 (30분)</h3>
       <ul>
         <li>백스쿼트 또는 고블릿 스쿼트 3×12</li>
@@ -458,7 +472,7 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
       </ul>
       <p class="dd" style="margin-top:8px">11월 중순부터 가벼운 무게와 적은 세트로 복귀합니다. 하프 직후와 피크 롱런·테이퍼 주에는 가동성으로 전환합니다.</p>
     </div>
-    <div class="card">
+    <div>
       <h3>B · 코어·안정성 (20분)</h3>
       <ul>
         <li>플랭크 60초 × 3</li>
@@ -470,7 +484,7 @@ footer{margin:14px 0 0;color:var(--muted);font-size:.77rem}
       </ul>
       <p class="dd" style="margin-top:8px">근육통이 남지 않을 정도로만 합니다. 레이스 주에는 가동성 위주로 가볍게 움직입니다.</p>
     </div>
-    <div class="card">
+    <div>
       <h3>C · 가동성·회복 (15분)</h3>
       <ul>
         <li>폼롤러 — 대퇴사두·IT밴드·둔근·종아리</li>
@@ -782,7 +796,7 @@ function stamp(date, status, pressed = date === pressedDate) {
 }
 // 도장 커서: 화살표 끝(3,2)이 찍는 지점이고, 오른쪽 아래에 도장 도구 표시가 붙어 있다.
 const cursorSvg = '<svg viewBox="0 0 48 48" aria-hidden="true">'
-  + '<path d="M3 2v22.5l6.2-6 4.3 9.6 3.9-1.7-4.2-9.4h8.6z" fill="#fff" stroke="#18191c" stroke-width="1.6" stroke-linejoin="round"/>'
+  + '<path d="M3 2v22.5l6.2-6 4.3 9.6 3.9-1.7-4.2-9.4h8.6z" fill="#fff" stroke="#18181b" stroke-width="1.6" stroke-linejoin="round"/>'
   + '<g fill="currentColor" stroke="#fff" stroke-width="1.6" paint-order="stroke">'
   + '<circle cx="34" cy="25.5" r="3.6"/><rect x="32" y="28" width="4" height="6.2" rx="1.3"/>'
   + '<rect x="26" y="33.6" width="16" height="6.6" rx="2.2"/><rect x="24.5" y="42.4" width="19" height="2.6" rx="1.3" opacity=".6"/></g></svg>';
